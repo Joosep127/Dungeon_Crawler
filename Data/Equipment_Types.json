@@ -1,0 +1,67 @@
+{
+    "Helmet": [
+        {"weapon": "Spike", "mod": 0.7},
+        {"weapon": "Motorcycle", "mod": 1.2},
+        {"weapon": "Bicycle", "mod": 1.0},
+        {"weapon": "Football", "mod": 2.0},
+        {"weapon": "Baseball", "mod": 0.8},
+        {"weapon": "Hockey", "mod": 1.0},
+        {"weapon": "Welding", "mod": 0.2},
+        {"weapon": "Firefighter", "mod": 3.0},
+        {"weapon": "Military", "mod": 4.0},
+        {"weapon": "Riot", "mod": 5.0},
+        {"weapon": "Climbing", "mod": 0.6}
+      ],
+      "Chestplate": [
+        {"weapon": "Steel", "mod": 1.0},
+        {"weapon": "Kevlar", "mod": 1.0},
+        {"weapon": "Titanium", "mod": 1.0},
+        {"weapon": "Leather", "mod": 1.0},
+        {"weapon": "Composite", "mod": 1.0},
+        {"weapon": "Chainmail", "mod": 1.0},
+        {"weapon": "Bulletproof", "mod": 1.0},
+        {"weapon": "Plasma Shield", "mod": 1.0},
+        {"weapon": "Reactive Armor", "mod": 1.0},
+        {"weapon": "Energy Absorbing", "mod": 1.0},
+        {"weapon": "Nanoweave", "mod": 1.0}
+      ],
+      "Leggings": [
+        {"weapon": "Camouflage", "mod": 1.0},
+        {"weapon": "Tactical", "mod": 1.0},
+        {"weapon": "Ninja", "mod": 1.0},
+        {"weapon": "Running", "mod": 1.0},
+        {"weapon": "Stealth", "mod": 1.0},
+        {"weapon": "Cargo", "mod": 1.0},
+        {"weapon": "Hiking", "mod": 1.0},
+        {"weapon": "Snowboarding", "mod": 1.0},
+        {"weapon": "Motocross", "mod": 1.0},
+        {"weapon": "Thermal", "mod": 1.0},
+        {"weapon": "Athletic", "mod": 1.0}
+      ],
+      "Boots": [
+        {"weapon": "Combat", "mod": 1.0},
+        {"weapon": "Hiking", "mod": 1.0},
+        {"weapon": "Steel Toe", "mod": 1.0},
+        {"weapon": "Sneakers", "mod": 1.0},
+        {"weapon": "Snow", "mod": 1.0},
+        {"weapon": "Motorcycle", "mod": 1.0},
+        {"weapon": "Work", "mod": 1.0},
+        {"weapon": "Wading", "mod": 1.0},
+        {"weapon": "Tactical", "mod": 1.0},
+        {"weapon": "Rain", "mod": 1.0},
+        {"weapon": "Athletic", "mod": 1.0}
+      ],
+      "Sword": [
+        {"weapon": "Broadsword", "mod": 1.0},
+        {"weapon": "Katana", "mod": 1.0},
+        {"weapon": "Rapier", "mod": 1.0},
+        {"weapon": "Claymore", "mod": 1.0},
+        {"weapon": "Dagger", "mod": 1.0},
+        {"weapon": "Scimitar", "mod": 1.0},
+        {"weapon": "Cutlass", "mod": 1.0},
+        {"weapon": "Longsword", "mod": 1.0},
+        {"weapon": "Foil", "mod": 1.0},
+        {"weapon": "Sabre", "mod": 1.0},
+        {"weapon": "Warblade", "mod": 1.0}
+      ]
+}
