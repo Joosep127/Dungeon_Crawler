@@ -1,6 +1,6 @@
 import random
 import json
-
+#gei
 class Equipment:
     def __init__(self, name, slot, stat):
         self.name = name
