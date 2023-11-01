@@ -2,6 +2,9 @@ from math import floor
 import os
 import time
 clear = lambda: os.system('cls')
+
+def Debug_Create(name, health, mana, damage, coin, clss):
+    return(Player(name, health, mana, damage, coin, clss))
 class Player:
     equipment = {
         "Helmet": None,
@@ -10,7 +13,7 @@ class Player:
         "Boots": None,
         "Sword": None    
 }
-    
+    # Player("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
     def __init__(self, name, health, mana, damage, coin, clss):
         self.name = name
         self.health = health
@@ -32,6 +35,9 @@ class Player:
         }
         self.spells = {}
         self.inventory = {}
+        self.depth = 1
+        self.zone = None
+        self.timer = 0 #How long you have stayed in one zone
     
     def add_coin(self, add):
         self.coin += add * self.multipliers["coin"]

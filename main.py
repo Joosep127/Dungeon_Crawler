@@ -1,27 +1,24 @@
 import os
 from math import floor
-from Classes.player import Create
+from Classes.player import Create, Debug_Create 
+from misc_functions import Hud
+from shop import Shop
 import time
 clear = lambda: os.system('cls')
 
-def Hud():
-    clear()
-    print(f"{player.name}, {player.clss}")
-    print(f"Hp: {player.health}/{player.max_health} | Magic: {player.mana}/{player.max_mana} | {player.coin}$ | Lvl: {player.level}")
-    #xp_needed = floor(20 * (player.multipliers["lvl_up"] ** (player.level - 1)) - player.xp)
-    #print(f"xp: {player.xp}\n")
+
 
 def Main():
     global player
     player = Create()
 
-    Hud()
+    Hud(player)
     if player.clss == 'The Physically Ill':
         print("Being not only Physically handicapped it appears you are also mentally retarded, deciding to go on an adventure to the local hole in the ground.\n")
     else:
         print("You one day decide to go to work, but you fell in to a hole.\n")
     input("[Press enter to continue]")
-    Hud()
+    Hud(player)
 
     
 
@@ -47,4 +44,8 @@ while False:
         break
 
 if __name__ == "__main__":
-    Main()
+    #Main()
+    while True:
+        player = Debug_Create("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
+        Shop(player)
+        input("[Press ENTER to continue]")
