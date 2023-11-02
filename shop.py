@@ -17,17 +17,12 @@ def Display_Shop_Items(shop_inverntory):
         print("Items:")
         print("{:^10} {:<10} {:<10} {:<15}".format("Index", "Cost", "Amount Left","Name"))
         print(a)
-        c = x
-    else:
-        c = 0
         
     b = ''
-    for i in shop_inverntory:
+    for x, i in enumerate(shop_inverntory):
             if isinstance(i, dict): 
                 continue
-            for x, p in enumerate(i):
-                b += "{:^10} {:<15} {:<10}\n".format(str([c+x+1]), f'{p[1]}$',p[0].name)
-            c += x
+            b += "{:^10} {:<15} {:<10}\n".format(str([x+1]), f'{i[1]}$',i[0].name)
     
     if b != '':
         print("Equipment:")
@@ -52,9 +47,9 @@ def Generate_Shop_Inv(depth):
             probability = item_properties.get("probability", 100)
             if probability >= random.randint(0, 100):
                 if item_name == "Armor":
-                    for _ in range(random.randint(1, item_properties.get("max", 1))):
+                    for _ in range(item_properties.get("max", 1)):
                         equipment = [Generate_Equipment(item_properties["effect"], probability), random.randint(*item_properties["cost"])]
-                        shop_items.extend(equipment)
+                        shop_items.append(equipment)
                 else:
                     shop_items.append({
                         "name": item_name,

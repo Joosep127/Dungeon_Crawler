@@ -16,7 +16,7 @@
             "cost": [4, 20],
             "effect": [1, 5],
             "probability": 100,
-            "max": 1
+            "max": 5
         }
     },
     "2": {
