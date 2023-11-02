@@ -3,20 +3,20 @@
         "Health Potion": {
             "cost": [3, 6],
             "effect": [10, 15],
-            "probability": 100,
-            "max": 5
+            "probability": 90,
+            "max": 6
         },
         "Mana Potion": {
             "cost": [1, 4],
             "effect": [2, 4],
-            "probability": 100,
+            "probability": 70,
             "max": 5
         },
         "Armor": {
             "cost": [4, 20],
             "effect": [1, 5],
-            "probability": 100,
-            "max": 5
+            "probability": 70,
+            "max": 2
         }
     },
     "2": {

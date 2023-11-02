@@ -7,9 +7,9 @@
         {"weapon": "Baseball Helmet", "mod": 0.8},
         {"weapon": "Hockey Helmet", "mod": 1.0},
         {"weapon": "Welding Helmet", "mod": 0.2},
-        {"weapon": "Firefighter Helmet", "mod": 3.0},
-        {"weapon": "Military Helmet", "mod": 4.0},
-        {"weapon": "Riot Helmet", "mod": 5.0},
+        {"weapon": "Firefighter Helmet", "mod": 2.0},
+        {"weapon": "Military Helmet", "mod": 2.5},
+        {"weapon": "Riot Helmet", "mod": 2.0},
         {"weapon": "Climbing Helmet", "mod": 0.6}
       ],
       "Chestplate": [

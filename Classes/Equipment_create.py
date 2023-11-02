@@ -1,5 +1,6 @@
 import random
 import json
+from math import ceil
 #gei
 class Equipment:
     def __init__(self, name, slot, stat):
@@ -19,4 +20,4 @@ def Create_Equipment(a):
         weapon = random.choice(json.load(f)[slot])
     name = "The " + random.choice(open('Data/names.txt').readlines()).replace("\n", "") + " " + weapon["weapon"]
 
-    return(Equipment(name, slot, int(a*weapon["mod"])))
+    return(Equipment(name, slot, ceil(a*weapon["mod"])))

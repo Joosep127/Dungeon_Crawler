@@ -31,7 +31,8 @@ class Player:
             "hp": 2, #default 2
             "mana": 2, #default 2
             "lvl_up": 1.5, #default 1.5
-            "coin": 1.0
+            "coin": 1.0,
+            "equipment": 0.5
         }
         self.spells = {}
         self.inventory = {}
@@ -76,13 +77,15 @@ class Player:
         else:
             self.spells[spell] = 1
     
-    def add_inventory(item):
-        if item in self.inventory:
+    def add_inventory(self, item):
+        if type(item) != dict:
+            self.inventory[item] = 'Equipment'
+        elif item in self.inventory:
             self.inventory[item] += 1
         else:
             self.inventory[item] = 1
     
-    def lose_inventory(item):
+    def lose_inventory(self, item):
         i = self.inventory.get(item, 0)
         if i > 0:
             i -= 1
@@ -90,10 +93,10 @@ class Player:
             if i == 0:
                 del self.inventory[item]
     
-    def add_equipment(item): #name, slot stat
+    def add_equipment(self, item): #name, slot stat
         self.equipment[item.slot] = item
 
-    def remove_equipment(item): #name, slot stat
+    def remove_equipment(self, item): #name, slot stat
         self.equipment[item.slot] = None
         add_inventory(item)
 
