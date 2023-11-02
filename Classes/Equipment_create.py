@@ -5,7 +5,7 @@ class Equipment:
     def __init__(self, name, slot, stat):
         self.name = name
         self.slot = slot
-        self.stat = stat
+        self.stat = stat 
 
 def Create_Equipment(a):
     slot = random.choice([

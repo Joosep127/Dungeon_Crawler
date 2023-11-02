@@ -89,6 +89,13 @@ class Player:
             self.inventory[item] = i
             if i == 0:
                 del self.inventory[item]
+    
+    def add_equipment(item): #name, slot stat
+        self.equipment[item.slot] = item
+
+    def remove_equipment(item): #name, slot stat
+        self.equipment[item.slot] = None
+        add_inventory(item)
 
 def Change_name():
     while True:
