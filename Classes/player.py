@@ -80,18 +80,19 @@ class Player:
     def add_inventory(self, item):
         if type(item) != dict:
             self.inventory[item] = 'Equipment'
-        elif item in self.inventory:
-            self.inventory[item] += 1
+        elif item["name"] in self.inventory:
+            self.inventory[item["name"]].append(item["effect"])
         else:
-            self.inventory[item] = 1
+            self.inventory[item["name"]] = [item["effect"]]
     
     def lose_inventory(self, item):
-        i = self.inventory.get(item, 0)
-        if i > 0:
-            i -= 1
-            self.inventory[item] = i
-            if i == 0:
-                del self.inventory[item]
+        if item["name"] not in self.inventory:
+            print("[ERROR]Item that you wanted to remove does not exist in your invetory")
+            time.sleep(2)
+            return()
+        self.inventory[item["name"]].remove(item["effect"])
+        if self.inventory[item["name"]] == []:
+            del self.inventory[item["name"]]
     
     def add_equipment(self, item): #name, slot stat
         self.equipment[item.slot] = item

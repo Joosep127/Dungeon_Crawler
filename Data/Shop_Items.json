@@ -3,7 +3,7 @@
         "Health Potion": {
             "cost": [3, 6],
             "effect": [10, 15],
-            "probability": 90,
+            "probability": 60,
             "max": 6
         },
         "Mana Potion": {

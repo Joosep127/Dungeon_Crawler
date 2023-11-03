@@ -30,7 +30,9 @@ def Display_Shop_Items(shop_inverntory):
         print(b)
     
     if a == '' and b == '':
-        print("The store shelf's are completely empty.")
+        print("The store shelf's are completely empty. \n ")
+    
+    print('   [0]    To exit\n \n')
 
 
 def Generate_Equipment(stat, probability, cost, player_multiplier, depth_multiplier):
@@ -38,6 +40,7 @@ def Generate_Equipment(stat, probability, cost, player_multiplier, depth_multipl
         random_stat = random.randint(*stat)
 
         cost =  ceil(random.randint(*cost) + 2 * (random_stat - 1) * player_multiplier * sqrt(depth_multiplier))
+
         return [ Create_Equipment(random_stat) , cost]
 
 def Generate_Shop_Inv(depth, multiplier):
@@ -48,46 +51,74 @@ def Generate_Shop_Inv(depth, multiplier):
     if player_depth_str in shop_data:
         for item_name, item_properties in shop_data[player_depth_str].items():
             probability = item_properties.get("probability", 100)
-            if probability >= random.randint(0, 100):
-                if item_name == "Armor":
-                    for _ in range(item_properties.get("max", 1)):
-                        equipment = Generate_Equipment(item_properties["effect"], probability, item_properties["cost"], multiplier , depth)
-                        
-                        shop_items.append(equipment)
-                else:
-                    shop_items.append({
-                        "name": item_name,
-                        "effect": random.randint(*item_properties["effect"]),
-                        "cost": random.randint(*item_properties["cost"]),
-                        "amount": random.randint(1, item_properties.get("max", 1))
+            if item_name == "Armor":
+                for _ in range(item_properties.get("max", 1)):
+
+                    equipment = Generate_Equipment(item_properties["effect"], probability, item_properties["cost"], multiplier , depth)
+                    if equipment == None:
+                        continue
+                    shop_items.append(equipment)
+                    
+            elif probability >= random.randint(0, 100):
+                shop_items.append({
+                    "name": item_name,
+                    "effect": random.randint(*item_properties["effect"]),
+                    "cost": random.randint(*item_properties["cost"]),
+                    "amount": random.randint(1, item_properties.get("max", 1))
                     })
     return(shop_items)
+
+def Shop_Hud(player, shop_items):
+    Hud(player)
+    Display_Shop_Items(shop_items)
 
 def Shop(player):
     
     shop_items = Generate_Shop_Inv(player.depth, player.multipliers['equipment'])
 
+    Shop_Hud(player, shop_items)
+
     while True:
-        Hud(player)
-        Display_Shop_Items(shop_items)
-        a = int(input("Select what Item to buy: \n"))-1
+        
+        a = input("Select: ")
+
+        if a.isdigit() and a != '':
+            a = int(a)-1
+        else:
+            Shop_Hud(player, shop_items)
+            print("Only input numbers you fucking idiot. \n")
+            time.sleep(0.3)
+            continue
 
         if 0 <= a < len(shop_items):
-            if isinstance(shop_items[a], dict):
-                if player.coin >= shop_items[a]['cost']:
-                    player.coin -= shop_items[a]['cost']
-                    player.add_inventory({'name' : shop_items[a]['name'], 'effect' : shop_items[a]['effect']})
+            if isinstance(shop_items[a], dict): # Adds items to invetory
+                temp = shop_items[a]
+                if player.coin >= temp['cost']:
+                    player.coin -= temp['cost']
+                    player.add_inventory({'name' : temp['name'], 'effect' : temp['effect']})
+                    temp["amount"] -= 1
+                    if temp["amount"] <= 0:
+                        del shop_items[a]
+                    Shop_Hud(player, shop_items)
+                    print('You bought a {} \n'.format(temp['name']))
                 else:
+                    Shop_Hud(player, shop_items)
                     print("You don't have enough money")
-            elif isinstance(shop_items[a], list):
-                if player.coin >= shop_items[a][1]:
-                    player.coin -= shop_items[a][1]
-                    player.add_inventory(shop_items[a][0])
+            elif isinstance(shop_items[a], list): # Adds equipment to invetory
+                temp = shop_items[a]
+                if player.coin >= temp[1]:
+                    player.coin -= temp[1]
+                    player.add_inventory(temp[0])
+                    del shop_items[a]
+                    Shop_Hud(player, shop_items)
+                    print('You bought {} \n'.format(temp[0].name))
                 else:
+                    Shop_Hud(player, shop_items)
                     print("You don't have enough money")
-
-        Hud(player)
-        print(player.inventory)
-        exit()
-
-        break
+        elif a == -1:
+            print("\nYou left the store")
+            return player
+        else:
+            Shop_Hud(player, shop_items)
+            print("Please enter a valid index. \n")
+            time.sleep(0.4)
