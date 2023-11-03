@@ -2,7 +2,8 @@ import os
 from math import floor
 from Classes.player import Create, Debug_Create 
 from misc_functions import Hud
-from shop import Shop
+from Adventure.fight import Fight
+from Adventure.shop import Shop
 import time
 clear = lambda: os.system('cls')
 
@@ -20,8 +21,6 @@ def Main():
     input("[Press enter to continue]")
     Hud(player)
 
-    
-
     while True: # Game Loop
         break
 
@@ -29,5 +28,6 @@ if __name__ == "__main__":
     #Main()
     while True:
         player = Debug_Create("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
-        Shop(player)
+        player.zone = 'Underground Forest' 
+        Fight(player)
         input("[Press ENTER to continue]")

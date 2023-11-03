@@ -1,4 +1,5 @@
 from math import floor
+from collections import Counter
 import os
 import time
 clear = lambda: os.system('cls')
@@ -34,6 +35,7 @@ class Player:
             "coin": 1.0,
             "equipment": 0.5
         }
+        self.skills = Counter()
         self.spells = {}
         self.inventory = {}
         self.depth = 1
@@ -100,6 +102,14 @@ class Player:
     def remove_equipment(self, item): #name, slot stat
         self.equipment[item.slot] = None
         add_inventory(item)
+    
+    def equipment_damage(self):
+        if self.equipment['Sword'] == None:
+            return(0)
+        return(self.equipment['sword'].stat)
+
+    def equipment_defence(self):
+        return(sum([self.equipment[i].stat for i in self.equipment.keys() if i != 'Sword' and self.equipment[i] is not None]))
 
 def Change_name():
     while True:
@@ -119,41 +129,41 @@ def Create():
     game_classes = {
     'The Regular Guy': {
         'name': '*Has a ketchup stain on his shirt',
-        'health': 100,
+        'health': 50,
         'mana': 50,
-        'damage': 20,
+        'damage': 5,
         'coin': 100,
         'multipliers': {}
     },
     'The Thief': {
         'name': '*Is decked out with handbags and whatnot from having stolen soo much loot from old ladies',
-        'health': 80,
+        'health': 40,
         'mana': 100,
-        'damage': 30,
+        'damage': 5,
         'coin': 50,
         'multipliers': {"coin": 2.0}
     },
     'The Knight': {
         'name': "*Despite the sword's steel blade haven fallen off from countless battles, he still uses the wooden handle to beat monsters into submission",
-        'health': 150,
+        'health': 45,
         'mana': 30,
-        'damage': 40,
+        'damage': 7,
         'coin': 200,
         'multipliers': {}
     },
     'The Rogue': {
         'name': '*Fast and agile, adapts.',
-        'health': 60,
+        'health': 50,
         'mana': 70,
-        'damage': 25,
+        'damage': 7,
         'coin': 75,
         'multipliers': {"xp": 2.7, "dmg": 2, "hp": 4, "lvl_up": 1.35,}
     },
     'The Physically Ill': {
         'name': '*Has the sniffles ): ',
-        'health': 50,
+        'health': 20,
         'mana': 10,
-        'damage': 10,
+        'damage': 5,
         'coin': 10,
         'multipliers': {"xp": 0.7, "dmg": 1, "hp": 1, "mana": 1, "lvl_up": 1.65, "coin": 0.7}
     }    
@@ -194,5 +204,7 @@ def Create():
 
     for j, i in multipliers.items():
         player.multipliers[j] = i
+
+    player.zone = random.choice(['Underground Forest','Glacier Cave','Haunted Grove'])
 
     return player

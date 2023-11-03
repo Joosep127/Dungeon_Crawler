@@ -8,6 +8,9 @@ class Equipment:
         self.slot = slot
         self.stat = stat 
 
+def None_Equipment(a):
+    Equipment("None", a, 0)
+
 def Create_Equipment(a):
     slot = random.choice([
         "Helmet",
