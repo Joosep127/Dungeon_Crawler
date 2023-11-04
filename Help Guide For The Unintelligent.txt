@@ -1,0 +1,20 @@
+Enemy format = {
+'name': 'Rat',
+'type': 'grass',  
+'attack': 8, 
+'health': 6, 
+'int': 1, 
+'attack_health_modifier_range': [0.1, 0.2], 
+'mana_range': [0, 0], 
+'can_use_magic': False, 
+'description': 'A common rodent often found in underground tunnels.'
+'grass': {'fire': 2.0, 'magma': 2.5,...}
+}
+
+enemy types = Grass, Cave, Swamp, Ice, Forest, Abyss, City, Fire
+spell elements = Fire, Magma, Holy, Ice, Arcane,Electricity, Illusion, Earth, Psychic, Air, Shadow
+
+#a inputs for enemy.py
+for a spell {type: power, element: type, value: int, name: name}
+for fight 'Attack'
+for run 'Run'

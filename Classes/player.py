@@ -37,10 +37,18 @@ class Player:
         }
         self.skills = Counter()
         self.spells = {}
+        self.afflictions = Counter()
         self.inventory = {}
         self.depth = 1
         self.zone = None
         self.timer = 0 #How long you have stayed in one zone
+
+    def cal_damage(self):
+        return( equipment_damage() + self.damage)
+    
+    def cal_defence(self):
+        return(sum([self.equipment[i].stat for i in self.equipment.keys() if i != 'Sword' and self.equipment[i] is not None]))
+
     
     def add_coin(self, add):
         self.coin += add * self.multipliers["coin"]
@@ -72,6 +80,9 @@ class Player:
             return(["Levelup", xp_gained])
 
         return([xp_gained])
+    
+    def reset_afflictions(self):
+        self.afflictions = Counter()
     
     def add_spell(self, spell):
         if spell in self.spells:
@@ -108,8 +119,6 @@ class Player:
             return(0)
         return(self.equipment['sword'].stat)
 
-    def equipment_defence(self):
-        return(sum([self.equipment[i].stat for i in self.equipment.keys() if i != 'Sword' and self.equipment[i] is not None]))
 
 def Change_name():
     while True:

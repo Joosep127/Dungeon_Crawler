@@ -1,0 +1,122 @@
+{
+    "Fireball": {
+      "description": "Launch a fiery projectile at your target, causing an explosion on impact.",
+      "cost": 10,
+      "attribute": {
+        "type": "damage",
+        "value": 50,
+        "strength_modifier": 1.2,
+        "element": "Fire"
+      }
+    },
+    "Magmaball": {
+        "description": "Launch a fiery projectile at your target, causing an explosion on impact.",
+        "cost": 15,
+        "attribute": {
+          "type": "damage",
+          "value": 80,
+          "strength_modifier": 1.4,
+          "element": "Magma"
+        }
+    },
+    "Healing Touch": {
+      "description": "Channel healing energy to restore health and vitality to a target.",
+      "cost": 15,
+      "attribute": {
+        "type": "healing",
+        "value": 40,
+        "strength_modifier": 1.1,
+        "element": "Holy"
+      }
+    },
+    "Frost Nova": {
+      "description": "Freeze all nearby enemies in a chilling blast, immobilizing them temporarily.",
+      "cost": 12,
+      "attribute": {
+        "type": "duration",
+        "value": 5,
+        "strength_modifier": 0.8,
+        "element": "Ice"
+      }
+    },
+    "Teleportation": {
+      "description": "Instantly transport yourself to a different location within your line of sight.",
+      "cost": 20,
+      "attribute": {
+        "type": "distance",
+        "value": "Short",
+        "strength_modifier": 0.0,
+        "element": "Arcane"
+      }
+    },
+    "Lightning Strike": {
+      "description": "Call down a bolt of lightning to smite your enemies with electrifying power.",
+      "cost": 18,
+      "attribute": {
+        "type": "damage",
+        "value": 60,
+        "strength_modifier": 1.3,
+        "element": "Electricity"
+      }
+    },
+    "Invisibility": {
+      "description": "Render yourself invisible to escape enemies or perform stealthy actions.",
+      "cost": 40,
+      "attribute": {
+        "type": "invisibility_duration",
+        "value": 60,
+        "strength_modifier": 1.0,
+        "element": "Illusion"
+      }
+    },
+    "Earthquake": {
+      "description": "Cause the ground to tremble and create shockwaves, damaging all nearby foes.",
+      "cost": 30,
+      "attribute": {
+        "type": "damage",
+        "value": 80,
+        "strength_modifier": 1.4,
+        "element": "Earth"
+      }
+    },
+    "Mind Control": {
+      "description": "Take control of the thoughts and actions of a target for a limited time.",
+      "cost": 40,
+      "attribute": {
+        "type": "control_duration",
+        "value": 45,
+        "strength_modifier": 1.1,
+        "element": "Psychic"
+      }
+    },
+    "Ice Lance": {
+      "description": "Summon a sharp ice lance and hurl it at your enemy, piercing through defenses.",
+      "cost": 14,
+      "attribute": {
+        "type": "damage",
+        "value": 55,
+        "strength_modifier": 1.1,
+        "element": "Ice"
+      }
+    },
+    "Wind Gust": {
+      "description": "Unleash a powerful gust of wind to push back enemies and disrupt their actions.",
+      "cost": 12,
+      "attribute": {
+        "type": "disruption",
+        "value": "Moderate",
+        "strength_modifier": 1.2,
+        "element": "Air"
+      }
+    },
+    "Shadow Step": {
+      "description": "Instantly teleport between shadows to maneuver stealthily or evade danger.",
+      "cost": 22,
+      "attribute": {
+        "type": "distance",
+        "value": "Long",
+        "strength_modifier": 1.0,
+        "element": "Shadow"
+      }
+    }
+}
