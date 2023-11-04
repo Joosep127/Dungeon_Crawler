@@ -1,82 +1,82 @@
 {
-    "1": {
-        "Underground Forest":{
-            "Goblin": {
-            "type": "grass",
-            "attack": 15,
-            "health": 15,
-            "int": 1,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A small, mischievous creature often found in the forest."
-            },
-            "Spider": {
-            "type": "cave",
-            "attack": 12,
-            "health": 10,
-            "int": 2,
-            "attack_health_modifier_range": [0.2, 0.5],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "An eight-legged arachnid known for weaving intricate webs."
-            },
-            "Slime": {
-            "type": "swamp",
-            "attack": 8,
-            "health": 20,
-            "int": 1,
-            "attack_health_modifier_range": [0.1, 0.3],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A gelatinous and amorphous creature that oozes through the forest."
-            },
-            "Bee": {
-            "type": "grass",
-            "attack": 10,
-            "health": 5,
-            "int": 3,
-            "attack_health_modifier_range": [0.2, 0.4],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A buzzing insect known for its painful stings."
-            },
-            "Mushroom Creature": {
-            "type": "swamp",
-            "attack": 14,
-            "health": 14,
-            "int": 1,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A sentient mushroom with peculiar abilities."
-            },
-            "Rat": {
-            "type": "grass",
-            "attack": 8,
-            "health": 6,
-            "int": 1,
-            "attack_health_modifier_range": [0.1, 0.2],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A common rodent often found in underground tunnels."
-            },
-            "Orc": {
-            "type": "grass",
-            "attack": 20,
-            "health": 30,
-            "int": 2,
-            "attack_health_modifier_range": [0.4, 0.7],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A formidable and aggressive humanoid creature."
-            }
+  "1": {
+    "Underground Forest":{
+        "Goblin": {
+        "type": "grass",
+        "attack": 15,
+        "health": 150,
+        "int": 1,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A small, mischievous creature often found in the forest."
         },
+        "Spider": {
+        "type": "cave",
+        "attack": 12,
+        "health": 100,
+        "int": 2,
+        "attack_health_modifier_range": [0.2, 0.5],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "An eight-legged arachnid known for weaving intricate webs."
+        },
+        "Slime": {
+        "type": "swamp",
+        "attack": 8,
+        "health": 200,
+        "int": 1,
+        "attack_health_modifier_range": [0.1, 0.3],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A gelatinous and amorphous creature that oozes through the forest."
+        },
+        "Bee": {
+        "type": "grass",
+        "attack": 10,
+        "health": 50,
+        "int": 3,
+        "attack_health_modifier_range": [0.2, 0.4],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A buzzing insect known for its painful stings."
+        },
+        "Mushroom Creature": {
+        "type": "swamp",
+        "attack": 14,
+        "health": 140,
+        "int": 1,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A sentient mushroom with peculiar abilities."
+        },
+        "Rat": {
+        "type": "grass",
+        "attack": 8,
+        "health": 60,
+        "int": 1,
+        "attack_health_modifier_range": [0.1, 0.2],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A common rodent often found in underground tunnels."
+        },
+        "Orc": {
+        "type": "grass",
+        "attack": 20,
+        "health": 300,
+        "int": 2,
+        "attack_health_modifier_range": [0.4, 0.7],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A formidable and aggressive humanoid creature."
+        }
+    },
         "Glacier Cave":{
         "Ice Elemental": {
         "type": "ice",
         "attack": 25,
-        "health": 35,
+        "health": 350,
         "int": 3,
         "attack_health_modifier_range": [0.4, 0.7],
         "mana_range": [10, 20],
@@ -86,7 +86,7 @@
         "Polar Bear": {
         "type": "ice",
         "attack": 18,
-        "health": 30,
+        "health": 300,
         "int": 1,
         "attack_health_modifier_range": [0.3, 0.6],
         "mana_range": [0, 0],
@@ -96,7 +96,7 @@
         "Frost Goblin": {
         "type": "ice",
         "attack": 12,
-        "health": 15,
+        "health": 150,
         "int": 2,
         "attack_health_modifier_range": [0.2, 0.5],
         "mana_range": [5, 10],
@@ -106,7 +106,7 @@
         "Snow Wolf": {
         "type": "ice",
         "attack": 20,
-        "health": 25,
+        "health": 250,
         "int": 1,
         "attack_health_modifier_range": [0.3, 0.6],
         "mana_range": [0, 0],
@@ -116,7 +116,7 @@
         "Frozen Zombie": {
         "type": "cave",
         "attack": 15,
-        "health": 20,
+        "health": 200,
         "int": 1,
         "attack_health_modifier_range": [0.2, 0.4],
         "mana_range": [0, 0],
@@ -126,7 +126,7 @@
         "Cave Yeti": {
         "type": "ice",
         "attack": 22,
-        "health": 28,
+        "health": 280,
         "int": 1,
         "attack_health_modifier_range": [0.3, 0.5],
         "mana_range": [0, 0],
@@ -136,7 +136,7 @@
         "Ice Spider": {
         "type": "ice",
         "attack": 13,
-        "health": 12,
+        "health": 120,
         "int": 2,
         "attack_health_modifier_range": [0.2, 0.4],
         "mana_range": [0, 0],
@@ -148,7 +148,7 @@
         "Wandering Spirit": {
         "type": "forest",
         "attack": 10,
-        "health": 20,
+        "health": 200,
         "int": 3,
         "attack_health_modifier_range": [0.2, 0.5],
         "mana_range": [10, 20],
@@ -158,7 +158,7 @@
         "Haunted Tree": {
         "type": "forest",
         "attack": 30,
-        "health": 50,
+        "health": 500,
         "int": 2,
         "attack_health_modifier_range": [0.4, 0.7],
         "mana_range": [0, 0],
@@ -168,7 +168,7 @@
         "Banshee": {
         "type": "forest",
         "attack": 15,
-        "health": 12,
+        "health": 120,
         "int": 4,
         "attack_health_modifier_range": [0.3, 0.6],
         "mana_range": [20, 30],
@@ -178,7 +178,7 @@
         "Ghostly Wolf": {
         "type": "forest",
         "attack": 20,
-        "health": 25,
+        "health": 250,
         "int": 1,
         "attack_health_modifier_range": [0.3, 0.6],
         "mana_range": [0, 0],
@@ -188,7 +188,7 @@
         "Spectral Owl": {
         "type": "forest",
         "attack": 14,
-        "health": 18,
+        "health": 180,
         "int": 3,
         "attack_health_modifier_range": [0.2, 0.5],
         "mana_range": [5, 10],
@@ -198,7 +198,7 @@
         "Ectoplasmic Slime": {
         "type": "swamp",
         "attack": 12,
-        "health": 14,
+        "health": 140,
         "int": 2,
         "attack_health_modifier_range": [0.2, 0.4],
         "mana_range": [0, 0],
@@ -208,7 +208,7 @@
         "Witch's Familiar": {
         "type": "forest",
         "attack": 16,
-        "health": 20,
+        "health": 200,
         "int": 4,
         "attack_health_modifier_range": [0.3, 0.6],
         "mana_range": [15, 25],
@@ -216,281 +216,281 @@
         "description": "A magical creature in the service of a witch."
         }
         }
+  },
+  "2": {
+    "Crystal Cave": {
+      "Crystal Golem": {
+        "type": "cave",
+        "attack": 25,
+        "health": 350,
+        "int": 3,
+        "attack_health_modifier_range": [0.4, 0.7],
+        "mana_range": [10, 20],
+        "can_use_magic": true,
+        "description": "A creature composed of pure crystal."
+      },
+      "Crystal Bat": {
+        "type": "cave",
+        "attack": 10,
+        "health": 120,
+        "int": 3,
+        "attack_health_modifier_range": [0.2, 0.5],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A bat with crystalline wings found in the cave."
+      },
+      "Shardling": {
+        "type": "cave",
+        "attack": 15,
+        "health": 180,
+        "int": 1,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "Small, sharp-edged creatures that roam the crystal caverns."
+      },
+      "Lava Beetle": {
+        "type": "cave",
+        "attack": 20,
+        "health": 200,
+        "int": 2,
+        "attack_health_modifier_range": [0.3, 0.5],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A beetle adapted to the cave's molten environment."
+      },
+      "Crystal Lizard": {
+        "type": "cave",
+        "attack": 14,
+        "health": 220,
+        "int": 1,
+        "attack_health_modifier_range": [0.2, 0.4],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A lizard with crystal-like scales, known for its speed."
+      },
+      "Living Crystal": {
+        "type": "cave",
+        "attack": 22,
+        "health": 250,
+        "int": 1,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A crystal entity with the ability to regenerate."
+      },
+      "Crystal Scorpion": {
+        "type": "cave",
+        "attack": 18,
+        "health": 180,
+        "int": 2,
+        "attack_health_modifier_range": [0.2, 0.5],
+        "mana_range": [5, 10],
+        "can_use_magic": true,
+        "description": "A scorpion with crystal exoskeleton and venomous stinger."
+      }
     },
-    "2": {
-        "Crystal Cave": {
-          "Crystal Golem": {
-            "type": "cave",
-            "attack": 25,
-            "health": 35,
-            "int": 3,
-            "attack_health_modifier_range": [0.4, 0.7],
-            "mana_range": [10, 20],
-            "can_use_magic": true,
-            "description": "A creature composed of pure crystal."
-          },
-          "Crystal Bat": {
-            "type": "cave",
-            "attack": 10,
-            "health": 12,
-            "int": 3,
-            "attack_health_modifier_range": [0.2, 0.5],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A bat with crystalline wings found in the cave."
-          },
-          "Shardling": {
-            "type": "cave",
-            "attack": 15,
-            "health": 18,
-            "int": 1,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "Small, sharp-edged creatures that roam the crystal caverns."
-          },
-          "Lava Beetle": {
-            "type": "cave",
-            "attack": 20,
-            "health": 20,
-            "int": 2,
-            "attack_health_modifier_range": [0.3, 0.5],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A beetle adapted to the cave's molten environment."
-          },
-          "Crystal Lizard": {
-            "type": "cave",
-            "attack": 14,
-            "health": 22,
-            "int": 1,
-            "attack_health_modifier_range": [0.2, 0.4],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A lizard with crystal-like scales, known for its speed."
-          },
-          "Living Crystal": {
-            "type": "cave",
-            "attack": 22,
-            "health": 25,
-            "int": 1,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A crystal entity with the ability to regenerate."
-          },
-          "Crystal Scorpion": {
-            "type": "cave",
-            "attack": 18,
-            "health": 18,
-            "int": 2,
-            "attack_health_modifier_range": [0.2, 0.5],
-            "mana_range": [5, 10],
-            "can_use_magic": true,
-            "description": "A scorpion with crystal exoskeleton and venomous stinger."
-          }
-        },
-        "Forgotten City": {
-          "Undead Warrior": {
-            "type": "city",
-            "attack": 30,
-            "health": 40,
-            "int": 2,
-            "attack_health_modifier_range": [0.4, 0.7],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A reanimated warrior guarding the forgotten city."
-          },
-          "Specter": {
-            "type": "city",
-            "attack": 20,
-            "health": 18,
-            "int": 3,
-            "attack_health_modifier_range": [0.2, 0.5],
-            "mana_range": [10, 20],
-            "can_use_magic": true,
-            "description": "A ghostly presence haunting the city's ruins."
-          },
-          "Zombie Mage": {
-            "type": "city",
-            "attack": 18,
-            "health": 15,
-            "int": 4,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [20, 30],
-            "can_use_magic": true,
-            "description": "A reanimated mage with magical abilities."
-          },
-          "Skeleton Archer": {
-            "type": "city",
-            "attack": 22,
-            "health": 14,
-            "int": 1,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A skeletal archer with keen marksmanship."
-          },
-          "Gargoyle": {
-            "type": "city",
-            "attack": 24,
-            "health": 28,
-            "int": 2,
-            "attack_health_modifier_range": [0.4, 0.7],
-            "mana_range": [5, 15],
-            "can_use_magic": true,
-            "description": "A stone guardian brought to life by ancient curses."
-          },
-          "Mummy": {
-            "type": "city",
-            "attack": 14,
-            "health": 40,
-            "int": 1,
-            "attack_health_modifier_range": [0.2, 0.5],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A preserved corpse wrapped in bandages, guarding the city's secrets."
-          },
-          "Wraith": {
-            "type": "city",
-            "attack": 30,
-            "health": 22,
-            "int": 3,
-            "attack_health_modifier_range": [0.5, 0.8],
-            "mana_range": [15, 25],
-            "can_use_magic": true,
-            "description": "An ethereal and malevolent spirit haunting the forgotten city."
-          }
-        },
-        "Subterranean Abyss": {
-          "Abyssal Stalker": {
-            "type": "abyss",
-            "attack": 28,
-            "health": 30,
-            "int": 3,
-            "attack_health_modifier_range": [0.4, 0.7],
-            "mana_range": [10, 20],
-            "can_use_magic": true,
-            "description": "A stealthy and deadly creature lurking in the abyssal darkness."
-          },
-          "Void Specter": {
-            "type": "abyss",
-            "attack": 18,
-            "health": 16,
-            "int": 2,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [5, 15],
-            "can_use_magic": true,
-            "description": "A ghostly entity from the void, with the power to drain life."
-          },
-          "Dark Elemental": {
-            "type": "abyss",
-            "attack": 24,
-            "health": 20,
-            "int": 4,
-            "attack_health_modifier_range": [0.5, 0.8],
-            "mana_range": [15, 25],
-            "can_use_magic": true,
-            "description": "An elemental of darkness with devastating dark magic."
-          }
-        }
+    "Forgotten City": {
+      "Undead Warrior": {
+        "type": "city",
+        "attack": 30,
+        "health": 400,
+        "int": 2,
+        "attack_health_modifier_range": [0.4, 0.7],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A reanimated warrior guarding the forgotten city."
+      },
+      "Specter": {
+        "type": "city",
+        "attack": 20,
+        "health": 180,
+        "int": 3,
+        "attack_health_modifier_range": [0.2, 0.5],
+        "mana_range": [10, 20],
+        "can_use_magic": true,
+        "description": "A ghostly presence haunting the city's ruins."
+      },
+      "Zombie Mage": {
+        "type": "city",
+        "attack": 18,
+        "health": 150,
+        "int": 4,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [20, 30],
+        "can_use_magic": true,
+        "description": "A reanimated mage with magical abilities."
+      },
+      "Skeleton Archer": {
+        "type": "city",
+        "attack": 22,
+        "health": 140,
+        "int": 1,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A skeletal archer with keen marksmanship."
+      },
+      "Gargoyle": {
+        "type": "city",
+        "attack": 24,
+        "health": 280,
+        "int": 2,
+        "attack_health_modifier_range": [0.4, 0.7],
+        "mana_range": [5, 15],
+        "can_use_magic": true,
+        "description": "A stone guardian brought to life by ancient curses."
+      },
+      "Mummy": {
+        "type": "city",
+        "attack": 14,
+        "health": 400,
+        "int": 1,
+        "attack_health_modifier_range": [0.2, 0.5],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A preserved corpse wrapped in bandages, guarding the city's secrets."
+      },
+      "Wraith": {
+        "type": "city",
+        "attack": 30,
+        "health": 220,
+        "int": 3,
+        "attack_health_modifier_range": [0.5, 0.8],
+        "mana_range": [15, 25],
+        "can_use_magic": true,
+        "description": "An ethereal and malevolent spirit haunting the forgotten city."
+      }
     },
-    "3": {
-        "Abyssal Cavern": {
-          "Abyssal Demon": {
-            "type": "abyss",
-            "attack": 36,
-            "health": 40,
-            "int": 3,
-            "attack_health_modifier_range": [0.4, 0.7],
-            "mana_range": [10, 20],
-            "can_use_magic": true,
-            "description": "A powerful demon from the abyss, wielding dark and chaotic magic."
-          },
-          "Dark Kraken": {
-            "type": "abyss",
-            "attack": 32,
-            "health": 45,
-            "int": 2,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [5, 15],
-            "can_use_magic": true,
-            "description": "A colossal sea monster from the abyssal depths, capable of inking the water."
-          },
-          "Serpent Cultist": {
-            "type": "abyss",
-            "attack": 28,
-            "health": 24,
-            "int": 4,
-            "attack_health_modifier_range": [0.5, 0.8],
-            "mana_range": [15, 25],
-            "can_use_magic": true,
-            "description": "A worshipper of abyssal serpents, casting dark rituals."
-          }
-        },
-        "Volcanic Depths": {
-          "Magma Elemental": {
-            "type": "fire",
-            "attack": 40,
-            "health": 35,
-            "int": 3,
-            "attack_health_modifier_range": [0.4, 0.7],
-            "mana_range": [10, 20],
-            "can_use_magic": true,
-            "description": "A fiery elemental born from molten rock and magma."
-          },
-          "Fire Imp": {
-            "type": "fire",
-            "attack": 22,
-            "health": 18,
-            "int": 2,
-            "attack_health_modifier_range": [0.3, 0.6],
-            "mana_range": [5, 15],
-            "can_use_magic": true,
-            "description": "A mischievous creature that enjoys playing with fire."
-          },
-          "Lava Hound": {
-            "type": "fire",
-            "attack": 30,
-            "health": 32,
-            "int": 1,
-            "attack_health_modifier_range": [0.2, 0.5],
-            "mana_range": [0, 0],
-            "can_use_magic": false,
-            "description": "A loyal and fiery canine that guards the volcanic depths."
-          }
-        },
-        "Eldritch Abyss": {
-          "Eldritch Horror": {
-            "type": "abyss",
-            "attack": 50,
-            "health": 60,
-            "int": 4,
-            "attack_health_modifier_range": [0.6, 0.9],
-            "mana_range": [20, 30],
-            "can_use_magic": true,
-            "description": "A nightmarish and eldritch monstrosity, beyond comprehension."
-          },
-          "Tentacled Monstrosity": {
-            "type": "abyss",
-            "attack": 36,
-            "health": 42,
-            "int": 3,
-            "attack_health_modifier_range": [0.4, 0.7],
-            "mana_range": [10, 20],
-            "can_use_magic": true,
-            "description": "A creature with writhing tentacles and a hunger for souls."
-          },
-          "Void Harbinger": {
-            "type": "abyss",
-            "attack": 44,
-            "health": 50,
-            "int": 5,
-            "attack_health_modifier_range": [0.7, 1.0],
-            "mana_range": [25, 35],
-            "can_use_magic": true,
-            "description": "A herald of the void, capable of unraveling reality with dark magic."
-          }
-        }
+    "Subterranean Abyss": {
+      "Abyssal Stalker": {
+        "type": "abyss",
+        "attack": 28,
+        "health": 300,
+        "int": 3,
+        "attack_health_modifier_range": [0.4, 0.7],
+        "mana_range": [10, 20],
+        "can_use_magic": true,
+        "description": "A stealthy and deadly creature lurking in the abyssal darkness."
+      },
+      "Void Specter": {
+        "type": "abyss",
+        "attack": 18,
+        "health": 160,
+        "int": 2,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [5, 15],
+        "can_use_magic": true,
+        "description": "A ghostly entity from the void, with the power to drain life."
+      },
+      "Dark Elemental": {
+        "type": "abyss",
+        "attack": 24,
+        "health": 200,
+        "int": 4,
+        "attack_health_modifier_range": [0.5, 0.8],
+        "mana_range": [15, 25],
+        "can_use_magic": true,
+        "description": "An elemental of darkness with devastating dark magic."
+      }
     }
+  },
+"3": {
+    "Abyssal Cavern": {
+      "Abyssal Demon": {
+        "type": "abyss",
+        "attack": 36,
+        "health": 400,
+        "int": 3,
+        "attack_health_modifier_range": [0.4, 0.7],
+        "mana_range": [10, 20],
+        "can_use_magic": true,
+        "description": "A powerful demon from the abyss, wielding dark and chaotic magic."
+      },
+      "Dark Kraken": {
+        "type": "abyss",
+        "attack": 32,
+        "health": 450,
+        "int": 2,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [5, 15],
+        "can_use_magic": true,
+        "description": "A colossal sea monster from the abyssal depths, capable of inking the water."
+      },
+      "Serpent Cultist": {
+        "type": "abyss",
+        "attack": 28,
+        "health": 240,
+        "int": 4,
+        "attack_health_modifier_range": [0.5, 0.8],
+        "mana_range": [15, 25],
+        "can_use_magic": true,
+        "description": "A worshipper of abyssal serpents, casting dark rituals."
+      }
+    },
+    "Volcanic Depths": {
+      "Magma Elemental": {
+        "type": "fire",
+        "attack": 40,
+        "health": 350,
+        "int": 3,
+        "attack_health_modifier_range": [0.4, 0.7],
+        "mana_range": [10, 20],
+        "can_use_magic": true,
+        "description": "A fiery elemental born from molten rock and magma."
+      },
+      "Fire Imp": {
+        "type": "fire",
+        "attack": 22,
+        "health": 180,
+        "int": 2,
+        "attack_health_modifier_range": [0.3, 0.6],
+        "mana_range": [5, 15],
+        "can_use_magic": true,
+        "description": "A mischievous creature that enjoys playing with fire."
+      },
+      "Lava Hound": {
+        "type": "fire",
+        "attack": 30,
+        "health": 320,
+        "int": 1,
+        "attack_health_modifier_range": [0.2, 0.5],
+        "mana_range": [0, 0],
+        "can_use_magic": false,
+        "description": "A loyal and fiery canine that guards the volcanic depths."
+      }
+    },
+    "Eldritch Abyss": {
+      "Eldritch Horror": {
+        "type": "abyss",
+        "attack": 50,
+        "health": 600,
+        "int": 4,
+        "attack_health_modifier_range": [0.6, 0.9],
+        "mana_range": [20, 30],
+        "can_use_magic": true,
+        "description": "A nightmarish and eldritch monstrosity, beyond comprehension."
+      },
+      "Tentacled Monstrosity": {
+        "type": "abyss",
+        "attack": 36,
+        "health": 420,
+        "int": 3,
+        "attack_health_modifier_range": [0.4, 0.7],
+        "mana_range": [10, 20],
+        "can_use_magic": true,
+        "description": "A creature with writhing tentacles and a hunger for souls."
+      },
+      "Void Harbinger": {
+        "type": "abyss",
+        "attack": 44,
+        "health": 500,
+        "int": 5,
+        "attack_health_modifier_range": [0.7, 1.0],
+        "mana_range": [25, 35],
+        "can_use_magic": true,
+        "description": "A herald of the void, capable of unraveling reality with dark magic."
+      }
+    }
+  }
 }

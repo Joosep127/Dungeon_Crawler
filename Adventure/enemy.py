@@ -12,7 +12,18 @@ def Select_Enemy(depth, zone):
 def Magic_Damage_2_Enemy(player, enemy, player_action):
     return player, enemy
 
-def Decide_Action(enemy):
+def Damage_Dolen(enemy):
+    if enemy['can_use_magic']:
+        raw_mana = random.uniform(enemy['mana_range'][0], enemy['mana_range'][1])
+        mana = min(max(raw_mana, 0), 1)
+        minimum_damage = max(round(enemy["attack"] * 0.1), 1)
+        damage_dolen = round(enemy["attack"] * (1 - random.uniform(*enemy['attack_health_modifier_range'])) * (mana + 0.1))
+        damage_dolen = max(damage_dolen * enemy['int'] / 4, minimum_damage)
+    else:
+        damage_dolen = max(round(enemy["attack"] * enemy['int'] / 4 * (1 - random.uniform(*enemy['attack_health_modifier_range'])), 1)
+    return(damage_dolen)
+
+def Decide_Action(enemy, player):
     if enemy["int"] == 1:
         action = random.choice(["attack", "nothing"])
     elif enemy["int"] == 2: # I have to remove the functionality for low intel creatures to use magic
@@ -47,56 +58,108 @@ def Decide_Action(enemy):
     return(action)
 
 def enemy_player_interaction(player, enemy, player_action):
-    enemy_action = Decide_Action(enemy)
-    if player_action == 'run':
-        if random.random() < 0.7:
+
+    enemy_action = Decide_Action(enemy, player)
+
+    if player_action == 'run': #If you succesfully run away
+        if random.random() < 0.4:
             if enemy_action == 'heal':
-                b = 'healing itself'
+                b = 'healing itself.'
             elif enemy_action == 'afflict':
-                b = 'trying to sneeze on you'
+                b = 'trying to sneeze on you.'
             else: 
-                b = enemy_action + 'ing'
-            a = ['ran', b]
+                b = enemy_action + 'ing' + ' you.'
+            a = ['ran', 'You miraculously ran away while the enemy was ' + b]
+
+
     elif enemy_action == 'block':
         if player_action == 'attack':
             if random.random() < 0.2:
                 t = round(player.cal_damage*0.4)
                 enemy.health -= t
-                a = f'The {enemy["name"]} effectively blocked your attack. Dealt {t} damage'
+                a = f'\nThe {enemy["name"]} effectively blocked your attack. Dealt {t} damage'
             else:
                 t = round(player.cal_damage*0.6)
                 enemy.health -= t
                 a = f'The {enemy["name"]} blocked your attack. Dealt {t} damage'
+            if enemy["health"] <= 0:
+                a += f'The aftershock of the attack, made the {enemy["name"]} pass out.'
         elif isinstance(player_action, dict):
             player, enemy = Magic_Damage_2_Enemy(player, enemy, player_action)
+            if enemy["health"] <= 0:
+                a += f"The {enemy["name"]} tried to block your attack but you ruthlessly cast {player_action["name"]} easily by passing it's attempt, killing it instantly."
         elif player_action == 'run':
-            a = f'The {enemy["name"]}blocked thin air. you ran but he caught up with you. Unlucky'
+            a = f'The {enemy["name"]} blocked thin air. you ran but he caught up with you. Unlucky'
         else:
             a = f"The {enemy["name"]} for some reason tried to block while you were standing at a reasonable distance."
-    elif enemy_action == 'heal':
-        if player_action == 'attack':
-            if random.random() < 0.2: 
-                t = player.cal_damage*2
-                enemy["health"] -= t
-                if enemy["health"] <= 0:
-                    a = f'The {enemy["name"]} tried to heal itself but you ruthlessly killed it with {t} damage before it could.'
-                else:
-                    
-            if random.random() < 0.2:
-                t = round(player.cal_damage*0.4)
-                enemy.health -= t
-                a = f'The {enemy["name"]} effectively blocked your attack. Dealt {t} damage'
-            else:
-                t = round(player.cal_damage*0.6)
-                enemy.health -= t
-                a = f'The {enemy["name"]} blocked your attack. Dealt {t} damage'
-        elif isinstance(player_action, dict):
-            player, enemy = Magic_Damage_2_Enemy(player, enemy, player_action)
-        elif player_action == 'run':
-            a = f'The {enemy["name"]}blocked thin air. you ran but he caught up with you. Unlucky'
-        else:
-            a = f"The {enemy["name"]} for some reason tried to block while you were standing at a reasonable distance."
+    
 
+    elif enemy_action == 'heal':
+        healt = 0.4*enemy["max_health"]
+        if player_action == 'attack':
+            t = player.cal_damage
+            if random.random() < 0.3: 
+                t *= 1.5
+                a = "[Critical Hit!]\n"
+
+            enemy["health"] -= t
+            if enemy["health"] <= 0:
+                a += f'The {enemy["name"]} tried to heal itself but you ruthlessly killed it with {t} damage before it could.'
+            else:
+                enemy["health"] += healt
+                a += f'You battered The {enemy["name"]} with {t} damage, but he healed for {healt}'
+        elif player_action == 'run':
+            a = f'The {enemy["name"]} was healing itself when you started booking it but he somehow caught up with you. Unlucky'
+        elif isinstance(player_action, dict):
+            player, enemy = Magic_Damage_2_Enemy(player, enemy, player_action)
+            if enemy["health"] <= 0:
+                a = f'The {enemy["name"]} tried to heal itself but you ruthlessly cast {player_action["name"]} before it could.'
+            else:
+                a = f'You cast {player_action["name"]} on the {enemy["name"]} but it quickly healed itself for {healt} Hp.'
+
+        else:
+            a = f"The {enemy["name"]} healed itself while you were standing at a reasonable distance. Good job 👍"
+        
+
+    elif enemy_action == 'attack':
+        damage_dolen = Damage_Dolen(enemy)
+        if player_action == 'attack':
+            t = player.cal_damage
+            if random.random() < 0.1: 
+                t *= 2
+                a = "[Critical Hit!]\n"
+            
+            
+            lose_hp(damage_dolen)
+            enemy["health"] -= t
+
+            if enemy["health"] <= 0:
+                if enemy['can_use_magic']:
+                    a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell on you dealing {damage_dolen}. This however angered you and you administered an outrageous ass-whooping dealing {t}"'
+                else:
+                    a += f"The {enemy["name"]} smacked you with all of it's might dealing {damage_dolen}. This however angered you and you administered an outrageous ass-whooping dealing {t}"'
+            else:
+                if enemy['can_use_magic']:
+                    a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell on you dealing {damage_dolen}, while the Ass goblin(you) dealt {t}."
+                else:
+                    a += f"The 2 idiots smacked themselves the {enemy["name"]} dealt {damage_dolen}. and the Ass goblin(you) dealt {t} dmg to it's enemy."
+
+        elif isinstance(player_action, dict):
+            player, enemy, a = Magic_Damage_2_Enemy(player, enemy, player_action)
+
+        elif player_action == 'run': 
+            if enemy['can_use_magic']:
+                a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were running away dealing {damage_dolen-2}. You fell on your face dealing an extra 2 damage, the enemy caught up with you."
+            else:
+                a += f"When you tried running away the {enemy["name"]} teleported infront of you saying 'お前はもう死んでいる' and it smacked you for {damage_dolen}."
+            lose_hp(damage_dolen)
+        else:
+            if enemy['can_use_magic']:
+                a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were obliviously standing there dealing {damage_dolen} damage"
+            else:
+                a += f"While you were doing jackshit the {enemy["name"]} walked infront of you want kneecapped you for {damage_dolen} damage"
+            lose_hp(damage_dolen)
+        
 
     a = 'string for happening'
     return player, enemy, a
