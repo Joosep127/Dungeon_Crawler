@@ -8,11 +8,24 @@ Enemy format = {
 'mana_range': [0, 0], 
 'can_use_magic': False, 
 'description': 'A common rodent often found in underground tunnels.'
-'grass': {'fire': 2.0, 'magma': 2.5,...}
 }
+
+#Fight Hud
+Joe, The man			|	Goblin
+Hp: 200/200  | Magic: 20/20	|	Hp: 20/20
+DMG: 5(+5) | DEF: 25		|	DMG: 5
+
+You confront the Goblin
+
+
+ Index   Action
+  [1]
+Select:
 
 enemy types = Grass, Cave, Swamp, Ice, Forest, Abyss, City, Fire
 spell elements = Fire, Magma, Holy, Ice, Arcane,Electricity, Illusion, Earth, Psychic, Air, Shadow
+
+enemy actions = attack heal block afflict
 
 #a inputs for enemy.py
 for a spell {type: power, element: type, value: int, name: name}

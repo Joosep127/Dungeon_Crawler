@@ -61,15 +61,14 @@ def enemy_player_interaction(player, enemy, player_action):
 
     enemy_action = Decide_Action(enemy, player)
 
-    if player_action == 'run': #If you succesfully run away
-        if random.random() < 0.4:
-            if enemy_action == 'heal':
-                b = 'healing itself.'
-            elif enemy_action == 'afflict':
-                b = 'trying to sneeze on you.'
-            else: 
-                b = enemy_action + 'ing' + ' you.'
-            a = ['ran', 'You miraculously ran away while the enemy was ' + b]
+    if player_action == 'run' and random.random() < 0.4: #If you succesfully run away
+        if enemy_action == 'heal':
+            b = 'healing itself.'
+        elif enemy_action == 'afflict':
+            b = 'trying to sneeze on you.'
+        else: 
+            b = enemy_action + 'ing' + ' you.'
+        a = ['ran', 'You miraculously ran away while the enemy was ' + b]
 
 
     elif enemy_action == 'block':
@@ -95,7 +94,9 @@ def enemy_player_interaction(player, enemy, player_action):
     
 
     elif enemy_action == 'heal':
+    
         healt = 0.4*enemy["max_health"]
+
         if player_action == 'attack':
             t = player.cal_damage
             if random.random() < 0.3: 
@@ -135,9 +136,9 @@ def enemy_player_interaction(player, enemy, player_action):
 
             if enemy["health"] <= 0:
                 if enemy['can_use_magic']:
-                    a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell on you dealing {damage_dolen}. This however angered you and you administered an outrageous ass-whooping dealing {t}"'
+                    a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell on you dealing {damage_dolen}. This however angered you and you administered an outrageous ass-whooping dealing {t}"
                 else:
-                    a += f"The {enemy["name"]} smacked you with all of it's might dealing {damage_dolen}. This however angered you and you administered an outrageous ass-whooping dealing {t}"'
+                    a += f"The {enemy["name"]} smacked you with all of it's might dealing {damage_dolen}. This however angered you and you administered an outrageous ass-whooping dealing {t}"
             else:
                 if enemy['can_use_magic']:
                     a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell on you dealing {damage_dolen}, while the Ass goblin(you) dealt {t}."
@@ -159,7 +160,38 @@ def enemy_player_interaction(player, enemy, player_action):
             else:
                 a += f"While you were doing jackshit the {enemy["name"]} walked infront of you want kneecapped you for {damage_dolen} damage"
             lose_hp(damage_dolen)
-        
+    
+    elif enemy_action == 'afflict':
+        if player_action == 'attack':
+            t = player.cal_damage
+            if random.random() < 0.1: 
+                t *= 2
+                a = "[Critical Hit!]\n"
+
+            enemy["health"] -= t
+
+            if enemy["health"] <= 0:
+                a += f"The {enemy["name"]} was trying to cast an affliction on you but you being a no nonsense bossman kind of person killed him before that dealing {t} damage"
+            else:
+                player = Affliction_Select(player)
+                a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell on you dealing {damage_dolen}, while the Ass goblin(you) dealt {t}."
+# I left off from here!!!
+        elif isinstance(player_action, dict):
+            player, enemy, a = Magic_Damage_2_Enemy(player, enemy, player_action)
+
+        elif player_action == 'run': 
+            if enemy['can_use_magic']:
+                a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were running away dealing {damage_dolen-2}. You fell on your face dealing an extra 2 damage, the enemy caught up with you."
+            else:
+                a += f"When you tried running away the {enemy["name"]} teleported infront of you saying 'お前はもう死んでいる' and it smacked you for {damage_dolen}."
+            lose_hp(damage_dolen)
+        else:
+            if enemy['can_use_magic']:
+                a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were obliviously standing there dealing {damage_dolen} damage"
+            else:
+                a += f"While you were doing jackshit the {enemy["name"]} walked infront of you want kneecapped you for {damage_dolen} damage"
+            lose_hp(damage_dolen)
+
 
     a = 'string for happening'
     return player, enemy, a

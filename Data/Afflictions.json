@@ -1,0 +1,29 @@
+{
+    "Underground Forest": {
+      "afflictions": ["poisoned", "entangled"]
+    },
+    "Glacier Cave": {
+      "afflictions": ["frozen", "slippery"]
+    },
+    "Haunted Grove": {
+      "afflictions": ["ghostly", "haunted"]
+    },
+    "Crystal Cave": {
+      "afflictions": ["crystalline"]
+    },
+    "Forgotten City": {
+      "afflictions": ["undead", "cursed"]
+    },
+    "Subterranean Abyss": {
+      "afflictions": ["darkness", "void"]
+    },
+    "Abyssal Cavern": {
+      "afflictions": ["abyssal", "draining"]
+    },
+    "Volcanic Depths": {
+      "afflictions": ["burning"]
+    },
+    "Eldritch Abyss": {
+      "afflictions": ["whispers"]
+    }
+  }
