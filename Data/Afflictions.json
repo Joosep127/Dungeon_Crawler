@@ -6,8 +6,8 @@
         "lose_next_turn": 3
     },
     "entangled": {
-        "type": "unable_to_attack",
-        "value": null,
+        "type": "can_attack",
+        "value": "False",
         "operator": null,
         "lose_next_turn": 2
     },
@@ -40,14 +40,16 @@
         "gain": "shattered"
     },
     "shattered": {
-        "type": "take_damage_once",
+        "type": "take_damage_half_hp",
         "value": 0.5,
-        "operator": "multiplicative"
+        "operator": "multiplicative",
+        "activated": 0
     },
     "undead": {
         "type": "lose_half_max_hp",
         "value": null,
-        "operator": null
+        "operator": null,
+        "activated": 0
     },
     "cursed": {
         "type": "hit_yourself",
@@ -78,17 +80,17 @@
         "type": "lose_mana",
         "value": 10,
         "operator": "additive",
-        "lose_next_turn": 5
+        "lose_next_turn": 3
     },
     "burning": {
-        "type": "take_damage",
+        "type": "lose_hp",
         "value": 10,
         "operator": "additive",
         "lose_next_turn": 5,
         "gain": "volcanic"
     },
     "volcanic": {
-        "type": "take_damage",
+        "type": "lose_hp",
         "value": 20,
         "operator": "additive",
         "lose_next_turn": 3
@@ -104,10 +106,10 @@
         "value": "False",
         "operator": null
     },
-    "invisible": {
+    "invisibility": {
         "type": "take_damage",
         "value": 0,
         "operator": "multiplicative",
-        "lose_next_turn": 2
+        "lose_next_turn": 0
     }
 }

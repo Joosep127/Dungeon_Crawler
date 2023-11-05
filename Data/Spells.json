@@ -31,11 +31,11 @@
     },
     "Frost Nova": {
       "description": "Freeze all nearby enemies in a chilling blast, immobilizing them temporarily.",
-      "cost": 12,
+      "cost": 40,
       "attribute": {
         "type": "duration",
-        "value": 5,
-        "strength_modifier": 0.8,
+        "value": 2,
+        "strength_modifier": 1.1,
         "element": "Ice"
       }
     },
@@ -63,9 +63,9 @@
       "description": "Render yourself invisible to escape enemies or perform stealthy actions.",
       "cost": 40,
       "attribute": {
-        "type": "invisibility_duration",
-        "value": 60,
-        "strength_modifier": 1.1,
+        "type": "self_duration",
+        "value": 3,
+        "strength_modifier": 0,
         "element": "Illusion"
       }
     },
@@ -83,8 +83,8 @@
       "description": "Take control of the thoughts and actions of a target for a limited time.",
       "cost": 40,
       "attribute": {
-        "type": "control_duration",
-        "value": 45,
+        "type": "duration",
+        "value": 3,
         "strength_modifier": 1.1,
         "element": "Psychic"
       }
@@ -104,18 +104,18 @@
       "cost": 12,
       "attribute": {
         "type": "disruption",
-        "value": "Moderate",
-        "strength_modifier": 1.2,
+        "value": 1.5,
+        "strength_modifier": 1.1,
         "element": "Air"
       }
     },
     "Shadow Step": {
-      "description": "Instantly teleport between shadows to maneuver stealthily or evade danger.",
-      "cost": 22,
+      "description": "Instantly teleport between shadows to maneuver stealthily or evade danger. deal 4x damage next attack",
+      "cost": 50,
       "attribute": {
-        "type": "distance",
-        "value": "Long",
-        "strength_modifier": 1.0,
+        "type": "damage",
+        "value": 4,
+        "strength_modifier": 1.1,
         "element": "Shadow"
       }
     }

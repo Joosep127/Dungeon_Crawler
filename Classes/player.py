@@ -34,7 +34,13 @@ class Player:
             "mana": 2, #default 2
             "lvl_up": 1.5, #default 1.5
             "coin": 1.0,
-            "equipment": 0.5
+            "equipment": 0.5,
+            "luck": 1.0
+        }
+        self.affliction_multipliers = {
+            "do_damage" : 1.0,
+            "do_damage_additive" : 0,
+            "take_damage" : 1.0
         }
         self.skills = Counter()
         self.spells = {}
@@ -45,7 +51,7 @@ class Player:
         self.timer = 0 #How long you have stayed in one zone
 
     def cal_damage(self):
-        return( equipment_damage() + self.damage)
+        return( (self.equipment_damage() + self.damage + self.affliction_multipliers["do_damage_additive"])* self.affliction_multipliers['do_damage'])
     
     def cal_defence(self):
         return(sum([self.equipment[i].stat for i in self.equipment.keys() if i != 'Sword' and self.equipment[i] is not None]))
@@ -54,11 +60,20 @@ class Player:
     def add_coin(self, add):
         self.coin += add * self.multipliers["coin"]
         
-    def lose_hp(self, lost):
+    def lose_hp(self, lost, *args):
+        lost *= self.affliction_multipliers['take_damage']
         self.health -= lost
+        
         if self.health <= 0:
-            print('U ded')
+            if args == ():
+                print('You died due to a heart attack\n\n')
+            elif args[0] == "affliction":
+                print('You died due to your afflictions\n\n')
+                
+            input("[ENTER] to close the game")
             exit()
+
+        return(lost)
         
     def add_hp(self, add):
         self.health += add
@@ -89,12 +104,97 @@ class Player:
         if a.keys() in self.afflictions().keys():
             if "gain" in a.keys:
                 if a["gain"] in self.afflictions():
-                    return(player, f"An affliction {a.keys[0]} was cast on you but You could attain it because you had an upgrade version of it already called {a["gain"]}.")
+                    return (player, f"An affliction {list(a.keys())[0]} was cast on you but you could attain it because you had an upgraded version of it already called {a.get('gain', 'unknown')}.")
                 else:
                     self.afflictions[a["gain"]] = find_affliction(a["gain"])
-                    return(player, f"An affliction {a.keys[0]} was cast on you but it upgraded to {a["gain"]}.")
+                    return(player, f"An affliction {list(a.keys())[0]} was cast on you but it upgraded to {a.get('gain', 'unknown')}.")
         self.afflictions[a] = a
         return(player, f"An affliction {a.keys[0]} was cast on you.")
+    
+    def round_start(self):
+        t = ''
+        do_damage = 1
+        do_damage_additive = 0
+        take_damage = 1
+        lose_hp = 0
+        add_hp = 0
+        lose_mana = 0
+        for x, i in self.afflictions.items():
+            if "activated" in i:
+                if i['activated'] == 0:
+                    i["activated"] = 1
+                    if i['lose_half_max_hp']:
+                        self.health /= 2
+                        self.max_health /= 2
+                    elif i['type'] == "take_damage_half_hp":
+                        lose_hp += self.health/2
+                else:
+                    continue
+            
+            if i['type'] == "do_damage":
+                if i["operator"] == "multiplicative":
+                    do_damage *= i['value']
+                elif i["operator"] == "additive":
+                    do_damage_additive += i['value']
+                else:
+                    print(f'unknown operator type {i["operator"]}')
+
+            elif i['type'] == "take_damage":
+                if i["operator"] == "multiplicative":
+                    take_damage *= i['value']
+                elif i["operator"] == "additive":
+                    lose_hp += i['value']
+                else:
+                    print(f'unknown operator type {i["operator"]}')
+            
+            elif i['type'] == "lose_hp":
+                lose_hp += i['value']
+
+            elif i['type'] == 'lose_mana':
+                lose_mana += i['value']
+
+            elif i['type'] == 'do_nothing':
+                pass
+            
+            else:
+                print(f"Unknown affliction {i}")
+
+
+            if "lose_next_turn" in i:
+                if "lose_next_turn" <= 0:
+                    del self.afflictions[x]
+                else:
+                    self.afflictions["lose_next_turn"] -= 1
+        
+        self.affliction_multipliers["do_damage"] = do_damage
+        self.affliction_multipliers["do_damage_additive"] = do_damage_additive
+        self.affliction_multipliers["take_damage"] = take_damage
+        self.add_hp(add_hp)
+        self.lose_hp(lose_hp, "affliction")
+
+        t0 = "\nDue to your afflictions you gained "
+        t1 = add_hp-lose_hp
+        t2 = do_damage_additive
+        t3 = take_damage
+
+        if t1 == 0 and t2 == 0 and t3 == 1:
+            return("")
+        if t1 != 0:
+            t0 += f"{t1} hp"
+        if t2 == 0 and t3 == 1:
+            return(t0 + ".")
+        else:
+            t0 += " "
+        if t1 != 0:
+            t0 += "and gained multipliers to your stats: "
+        else:
+            t0 += "multipliers to your stats: "
+        if t2 != 0:
+            t0 += f"{t2} * dmg "
+        if t3 != 1:
+            t0 += f"{t3} * Damage taken."
+
+        return(t0)
     
     def add_spell(self, spell):
         if spell in self.spells:
