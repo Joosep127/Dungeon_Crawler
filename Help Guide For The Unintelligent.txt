@@ -1,3 +1,35 @@
+afflictions = [ # can be gained through an enemy, items or your own spells
+    "poisoned",  # take slightly more damage 1.1
+    "entangled", # unable to attack
+    "frozen", # slightly lowered damage 0.9
+    "slippery", # chance to fail an attack
+    "ghostly", # take less damage
+    "haunted", # do less damage
+    "crystalline", # Nothing first time, if cast second time, take half of your max hp
+    "shattered", # gained after being shattered from crystalline, can't be shattered again
+    "undead", # away half of your max hp for the rest of the fight
+    "cursed", # small chance to hit yourself with an attack dealing 0.5 damage to yourself
+    "darkness", # can't see any stats about your enemy
+    "void", # larger chance for your attacks to be void
+    "abyssal", # do 0.4 damage of your damage
+    "draining", # lose 10 mana every turn
+    "burning", # take 10 hp every turn # if cast twice gain volcanic
+    "volcanic", # take 20 hp every turn
+    "eldritch", #first time nothing, second time gain whispers
+    "whispers", # can't cast magic
+    "invisible", #can't be hit
+    "Shadow Step", # deal 4x damage next attack
+    "
+] #all afflictions are cleared after a fight
+
+affliction  'name': {"type"  "value"  "operator"  "lose_next_turn"  "chance"  "gain"  'activated'}
+
+affliction types = ['hit_yourself']
+
+affliction types ive programmed in = ["do_damage", 'lose_hp', 'lose_half_max_hp', 'do_nothing', "add_hp", 'lose_mana', "take_damage_half_hp", 'chance_to_fail_attack', 'can_attack', 'can_cast_magic']
+
+enemy afflictions =  "duration" "disruption"
+
 Enemy format = {
 'name': 'Rat',
 'type': 'grass',  
@@ -8,7 +40,10 @@ Enemy format = {
 'mana_range': [0, 0], 
 'can_use_magic': False, 
 'description': 'A common rodent often found in underground tunnels.'
+'weaknesses', {"Fire": 2.0, "Magma": 2.5, "Holy": 0.5,..},
+'afflictions': []
 }
+
 
 #Fight Hud
 Joe, The man			|	Goblin
@@ -24,6 +59,7 @@ Select:
 
 enemy types = Grass, Cave, Swamp, Ice, Forest, Abyss, City, Fire
 spell elements = Fire, Magma, Holy, Ice, Arcane,Electricity, Illusion, Earth, Psychic, Air, Shadow
+spell types = "damage"  "healing"  "duration"  "distance"#Not a fight spell  "disruption" "self_duration"
 
 enemy actions = attack heal block afflict
 

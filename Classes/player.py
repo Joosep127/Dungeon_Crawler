@@ -79,7 +79,17 @@ class Player:
         self.health += add
         if self.health > self.max_health:
             self.health = self.max_health
-        
+
+    def add_mana(self, add):
+        self.mana += add
+        if self.mana > self.max_mana:
+            self.mana = self.max_mana
+
+    def lose_mana(self, lost):
+        self.mana -= add
+        if self.mana < 0:
+            self.mana = 0
+
     def add_xp(self, add):
         xp_gained = floor(add * self.multipliers["xp"])
         self.xp += xp_gained
@@ -209,11 +219,28 @@ class Player:
             self.inventory[item["name"]].append(item["effect"])
         else:
             self.inventory[item["name"]] = [item["effect"]]
+        for i in self.inventory:
+            self.inventory[i].sort()
     
+    def use_inventory(self, item_name, value):
+        if item_name == "Health Potion":
+            self.add_hp(value)
+            t = f"You gained +{value} hp."
+        elif item_name == "Mana Potion":
+            self.add_mana(value)
+            t = f"You gained +{value} mana."
+        else:
+            t = "You used an item that cannot be used. Gongrats. You lost the " + item_name + " now."
+        self.lose_inventory({'name': item_name, 'effect': value})
+        return(t)
+
     def lose_inventory(self, item):
         if item["name"] not in self.inventory:
             print("[ERROR]Item that you wanted to remove does not exist in your invetory")
             time.sleep(2)
+            return()
+        if self.inventory[item["name"]] == "Equipment":
+            del self.inventory[item["name"]]
             return()
         self.inventory[item["name"]].remove(item["effect"])
         if self.inventory[item["name"]] == []:

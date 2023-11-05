@@ -20,11 +20,51 @@ def Magic(player):
 #UNFINISHED
     return player, a
 
-def Inventory(player):
+def Inventory(player,enemy, can_see_stats):
+    inv = {x:i for x,i in player.inventory.items() if i != 'Equipment'}
+    has_consumed_item = False
+    happening = "\n"
     while True:
-        a = input("Inventory 0 to exit")
-        if a == 0:
+        Combat_Hud(player, enemy, can_see_stats)
+        print(happening)
+        print('-'*22)
+        print("{:^10} [{:<4}] {:<12} {:<5}".format("Index", "Amount", "Item", "Effectivness"))
+        t = "\n"
+        print(f"\n{'0':^10}Exit the inventory")
+        print('-'*22)
+        
+        index = 1
+        dic = {}
+        for item, values in inv.items():
+            dic[index] = item
+            for value in values:
+                print(f"{index:^10} [{values.count(value):^5}] {item:<20} {value:<5}")
+                index += 1
+        a = input("Select: ")
+        
+        if not a.isdigit():
+            happening = "Please Enter an index."
+            time.sleep(0.4)
+            continue
+        
+        if a == '0' and not has_consumed_item:
             return player, "exit"
+        has_consumed_item = True
+        if a == '0':
+            return player, ""
+        if 0 < int(a) < index:
+            pass
+        else:
+            happening = "Please select a correct index."
+            continue
+        a = int(a)
+        for i in dic.keys():
+            if i <= a:
+                d = i
+        
+        happening = player.use_inventory(dic[d], player.inventory[dic[d]][a-d])
+        index -= 1
+
     
 #UNFINISHED
 
@@ -143,7 +183,7 @@ def Fight(player):
                         print("You tried to but you couldn't break free of the " + afflicted_magic)
                         time.sleep(0.4)
                 elif a == 'Inventory':
-                    player, a = Inventory(player)
+                    player, a = Inventory(player,enemy, can_see_stats)
                     if a == 'exit':
                         t = '*You closed your inventory\n'
                         continue
@@ -178,7 +218,7 @@ def Fight(player):
 
     player.reset_afflictions()
 
-    if random.random() < 0.3 and enemy[health] <= 0:
+    if random.random() < 0.3 and enemy["health"] <= 0:
         player = Loot(player, enemy["name"])
     
     return(player)
