@@ -133,7 +133,7 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
                 a = f'\nThe {enemy["name"]} effectively blocked your attack. Dealt {t} damage'
             else:
                 t = round(player.cal_damage()*0.6)
-                enemy[health] -= t
+                enemy["health"] -= t
                 a = f'The {enemy["name"]} blocked your attack. Dealt {t} damage'
             if enemy["health"] <= 0:
                 a += f'The aftershock of the attack, made the {enemy["name"]} pass out.'

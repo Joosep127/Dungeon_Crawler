@@ -32,7 +32,8 @@ def Fight(player):
 
     escaped = [False]
     enemy = Select_Enemy(str(player.depth), player.zone)
-    happening = random.choice([
+    happening = "\n\n\n\n\n"
+    happening += random.choice([
     f"You walk upon the {enemy['name']}.",
     f"The {enemy['name']} jumps in front of you.",
     f"The {enemy['name']} roars loudly.",
@@ -46,7 +47,7 @@ def Fight(player):
     f"The {enemy['name']} readies itself for an encounter with you.",
     f"A battle with the {enemy['name']} seems inevitable."
     ])
-    happening += "\n\n\n\n\n"
+    happening += "\n"
     t = "\n"
 
     while True:
@@ -164,6 +165,12 @@ def Fight(player):
             happening += temp[1]
         else:
             happening += temp
+
+        if enemy["health"] <= 0:
+            print(happening)
+            print(f"With the {enemy['name']} as good dead you continue on your jurney.")
+            input("\n[ENTER] to continue")
+            break
         
     if "undead" in player.afflictions:
         player.health *= 2
