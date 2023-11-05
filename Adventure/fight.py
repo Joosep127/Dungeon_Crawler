@@ -2,7 +2,7 @@ import time
 import json
 import random
 from misc_functions import Combat_Hud
-from Adventure.enemy import Select_Enemy, Decide_Action
+from Adventure.enemy import Select_Enemy, Decide_Action, Enemy_Player_Interaction()
 from Adventure.misc_zones import Loot
 
 
@@ -44,14 +44,8 @@ def Fight(player):
     options = ['Attack', 'Magic', 'Inventory', 'Run']
     while True:
         if happening[0] == 'ran':
-            if player.health/player.max_health < 0.3:
-                print('You despretly fled from the ' + enemy['name'] + ' while he was ' + happening[1])
-            if player.health/player.max_health < 0.6:
-                print('You fled from the ' + enemy['name'] + ' while he was ' + happening[1])
-            if player.health/player.max_health < 0.9:
-                print('Deciding to pack your shit up you up and left while the ' + enemy['name'] + ' was ' + happening[1])
-            else:
-                print('You wandred off.')
+            Combat_Hud(player, enemy)
+            print(happening)
             print('\n')
             input('[ENTER] To continue')
             break
@@ -65,7 +59,7 @@ def Fight(player):
         a = input("Select: ")
         if a.isdigit():
             if 0 <= int(a)-1 < len(options):
-                a = options(a)
+                a = options[a]
                 if a == 'Attack':
                     pass
                 elif a == 'Magic':
@@ -92,7 +86,7 @@ def Fight(player):
             time.sleep(0.4)
             continue
 
-        player, enemy, happening = enemy_player_interaction(player, enemy, a)
+        player, enemy, happening = Enemy_Player_Interaction(player, enemy, a.lower())
     if random.random() < 0.1:
         player = Loot(player)
     return(player)

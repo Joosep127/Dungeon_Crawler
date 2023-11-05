@@ -1,4 +1,5 @@
 from math import floor
+import json
 from collections import Counter
 import os
 import time
@@ -37,7 +38,7 @@ class Player:
         }
         self.skills = Counter()
         self.spells = {}
-        self.afflictions = Counter()
+        self.afflictions = {}
         self.inventory = {}
         self.depth = 1
         self.zone = None
@@ -82,7 +83,18 @@ class Player:
         return([xp_gained])
     
     def reset_afflictions(self):
-        self.afflictions = Counter()
+        self.afflictions = {}
+
+    def add_afflictions(self, a):
+        if a.keys() in self.afflictions().keys():
+            if "gain" in a.keys:
+                if a["gain"] in self.afflictions():
+                    return(player, f"An affliction {a.keys[0]} was cast on you but You could attain it because you had an upgrade version of it already called {a["gain"]}.")
+                else:
+                    self.afflictions[a["gain"]] = find_affliction(a["gain"])
+                    return(player, f"An affliction {a.keys[0]} was cast on you but it upgraded to {a["gain"]}.")
+        self.afflictions[a] = a
+        return(player, f"An affliction {a.keys[0]} was cast on you.")
     
     def add_spell(self, spell):
         if spell in self.spells:
@@ -119,6 +131,14 @@ class Player:
             return(0)
         return(self.equipment['sword'].stat)
 
+def find_affliction(a):
+    try:
+        with open("Data/Afflictions.json") as f:
+            return(f[a])
+    except:
+        print("No affliction was found with the name " + a)
+        time.sleep(1)
+        return None
 
 def Change_name():
     while True:

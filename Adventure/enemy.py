@@ -9,8 +9,14 @@ def Select_Enemy(depth, zone):
         d = json.load(f)[a[key]['type']]
     return {**a[key], 'name': key, 'max_health': a[key]["health"], d}
 
+def Affliction_Select(player):
+    with open("Data/Gain_Afflictions.json", 'r') as f:
+        a = json.load(f)[player.zone]
+    return(player.add_afflictions(a))
+
 def Magic_Damage_2_Enemy(player, enemy, player_action):
     return player, enemy
+# Have to programm this!!
 
 def Damage_Dolen(enemy):
     if enemy['can_use_magic']:
@@ -57,7 +63,7 @@ def Decide_Action(enemy, player):
         action = 'There has been a bug with the enemy INT json file. the range for INT has to be 1-4'
     return(action)
 
-def enemy_player_interaction(player, enemy, player_action):
+def Enemy_Player_Interaction(player, enemy, player_action):
 
     enemy_action = Decide_Action(enemy, player)
 
@@ -162,6 +168,7 @@ def enemy_player_interaction(player, enemy, player_action):
             lose_hp(damage_dolen)
     
     elif enemy_action == 'afflict':
+        player, temp = Affliction_Select(player)
         if player_action == 'attack':
             t = player.cal_damage
             if random.random() < 0.1: 
@@ -173,25 +180,15 @@ def enemy_player_interaction(player, enemy, player_action):
             if enemy["health"] <= 0:
                 a += f"The {enemy["name"]} was trying to cast an affliction on you but you being a no nonsense bossman kind of person killed him before that dealing {t} damage"
             else:
-                player = Affliction_Select(player)
-                a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell on you dealing {damage_dolen}, while the Ass goblin(you) dealt {t}."
-# I left off from here!!!
+                a += f"{temp}, while the Ass goblin(you) dealt {t}."
+
         elif isinstance(player_action, dict):
             player, enemy, a = Magic_Damage_2_Enemy(player, enemy, player_action)
-
+            a += f"\n{temp}"
+# I left off from here!!!
         elif player_action == 'run': 
-            if enemy['can_use_magic']:
-                a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were running away dealing {damage_dolen-2}. You fell on your face dealing an extra 2 damage, the enemy caught up with you."
-            else:
-                a += f"When you tried running away the {enemy["name"]} teleported infront of you saying 'お前はもう死んでいる' and it smacked you for {damage_dolen}."
-            lose_hp(damage_dolen)
+            a = f"{temp}, while you were trying to run away. The enemy despite this caught up with you."
         else:
-            if enemy['can_use_magic']:
-                a += f"The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were obliviously standing there dealing {damage_dolen} damage"
-            else:
-                a += f"While you were doing jackshit the {enemy["name"]} walked infront of you want kneecapped you for {damage_dolen} damage"
-            lose_hp(damage_dolen)
+            a = f"{temp}, while you were standing at a reasonable distance."
 
-
-    a = 'string for happening'
     return player, enemy, a

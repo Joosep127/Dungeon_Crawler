@@ -1,0 +1,11 @@
+{
+    "Underground Forest": ["poisoned", "entangled"],
+    "Glacier Cave": ["frozen", "slippery"],
+    "Haunted Grove": ["ghostly", "haunted"],
+    "Crystal Cave": ["crystalline"],
+    "Forgotten City": ["undead", "cursed"],
+    "Subterranean Abyss": ["darkness", "void"],
+    "Abyssal Cavern": ["abyssal", "draining"],
+    "Volcanic Depths": ["burning"],
+    "Eldritch Abyss": ["eldritch"]
+}

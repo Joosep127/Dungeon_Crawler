@@ -1,29 +1,113 @@
 {
-    "Underground Forest": {
-      "afflictions": ["poisoned", "entangled"]
+    "poisoned": {
+        "type": "take_damage",
+        "value": 1.1,
+        "operator": "multiplicative",
+        "lose_next_turn": 3
     },
-    "Glacier Cave": {
-      "afflictions": ["frozen", "slippery"]
+    "entangled": {
+        "type": "unable_to_attack",
+        "value": null,
+        "operator": null,
+        "lose_next_turn": 2
     },
-    "Haunted Grove": {
-      "afflictions": ["ghostly", "haunted"]
+    "frozen": {
+        "type": "do_damage",
+        "value": 0.9,
+        "operator": "multiplicative",
+        "lose_next_turn": 4
     },
-    "Crystal Cave": {
-      "afflictions": ["crystalline"]
+    "slippery": {
+        "type": "chance_to_fail_attack",
+        "value": 0.2,
+        "operator": "multiplicative"
     },
-    "Forgotten City": {
-      "afflictions": ["undead", "cursed"]
+    "ghostly": {
+        "type": "take_damage",
+        "value": 0.9,
+        "operator": "multiplicative"
     },
-    "Subterranean Abyss": {
-      "afflictions": ["darkness", "void"]
+    "haunted": {
+        "type": "do_damage",
+        "value": 0.8,
+        "operator": "multiplicative"
     },
-    "Abyssal Cavern": {
-      "afflictions": ["abyssal", "draining"]
+    "crystalline": {
+        "type": "do_nothing",
+        "value": null,
+        "operator": null,
+        "lose_next_turn": 4,
+        "gain": "shattered"
     },
-    "Volcanic Depths": {
-      "afflictions": ["burning"]
+    "shattered": {
+        "type": "take_damage_once",
+        "value": 0.5,
+        "operator": "multiplicative"
     },
-    "Eldritch Abyss": {
-      "afflictions": ["whispers"]
+    "undead": {
+        "type": "lose_half_max_hp",
+        "value": null,
+        "operator": null
+    },
+    "cursed": {
+        "type": "hit_yourself",
+        "value": 0.5,
+        "operator": "multiplicative",
+        "chance": 0.3
+    },
+    "darkness": {
+        "type": "cant_see_enemy_stats",
+        "value": null,
+        "operator": null,
+        "lose_next_turn": 5
+    },
+    "void": {
+        "type": "do_damage",
+        "value": 0,
+        "operator": "multiplicative",
+        "chance": 0.6,
+        "lose_next_turn": 2
+    },
+    "abyssal": {
+        "type": "do_damage",
+        "value": 0.4,
+        "operator": "multiplicative",
+        "lose_next_turn": 4
+    },
+    "draining": {
+        "type": "lose_mana",
+        "value": 10,
+        "operator": "additive",
+        "lose_next_turn": 5
+    },
+    "burning": {
+        "type": "take_damage",
+        "value": 10,
+        "operator": "additive",
+        "lose_next_turn": 5,
+        "gain": "volcanic"
+    },
+    "volcanic": {
+        "type": "take_damage",
+        "value": 20,
+        "operator": "additive",
+        "lose_next_turn": 3
+    },
+    "eldritch": {
+        "type": "do_nothing",
+        "value": null,
+        "operator": null,
+        "gain": "whispers"
+    },
+    "whispers": {
+        "type": "can_cast_magic",
+        "value": "False",
+        "operator": null
+    },
+    "invisible": {
+        "type": "take_damage",
+        "value": 0,
+        "operator": "multiplicative",
+        "lose_next_turn": 2
     }
-  }
+}
