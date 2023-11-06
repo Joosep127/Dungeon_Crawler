@@ -17,7 +17,8 @@ def Affliction_Select(player):
 def Magic_Damage_2_Enemy(player, enemy, player_action):
     temp = enemy['weaknesses'][player_action["element"]]
     if isinstance(player_action["value"], int):
-        player_action["value"] *= temp
+        player_action["value"] = round(player_action["value"]*temp)
+
     if temp < 0.9:
         temp = "Due to the enemies element, your spell was weakened.\n"
     elif temp > 1.1:
@@ -181,6 +182,8 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
     elif enemy_action == 'attack':
     
         damage_dolen = Damage_Dolen(enemy)
+        player.lose_hp(damage_dolen)
+
         if player_action == 'attack':
             t = player.cal_damage()
             if random.random() < 0.1: 
@@ -189,8 +192,8 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
             else:
                 a = ""
             
-            
             player.lose_hp(damage_dolen)
+            
             enemy["health"] -= t
 
             if enemy["health"] <= 0:
@@ -207,22 +210,23 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
         elif isinstance(player_action, dict):
             player, enemy, a = Magic_Damage_2_Enemy(player, enemy, player_action)
             if enemy["health"] <= 0:
-                a += '\nThe {enemy["name"]} enemy dealt {damage_dolen} damage to you before fainting from your attack.'
+                a += f'\nThe {enemy["name"]} enemy dealt {damage_dolen} damage to you before fainting from your attack.'
             else:
-                a += '\nThe {enemy["name"]} got mad a your mad skills so it dealt {damage_dolen} damage to you in retaliation.'
+                a += f'\nThe {enemy["name"]} got mad a your mad skills so it dealt {damage_dolen} damage to you in retaliation.'
+            
 
         elif player_action == 'run': 
             if enemy['can_use_magic']:
                 a = f'The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were running away dealing {damage_dolen-2}. You fell on your face dealing an extra 2 damage, the enemy caught up with you.'
             else:
                 a = f'''When you tried running away the {enemy["name"]} teleported infront of you saying 'お前はもう死んでいる' and it smacked you for {damage_dolen}.'''
-            player.lose_hp(damage_dolen)
+            
         else:
             if enemy['can_use_magic']:
                 a = f'The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were obliviously standing there dealing {damage_dolen} damage'
             else:
                 a = f'While you were doing jackshit the {enemy["name"]} walked infront of you want kneecapped you for {damage_dolen} damage'
-            player.lose_hp(damage_dolen)
+            
     
     elif enemy_action == 'afflict':
         player, temp = Affliction_Select(player)

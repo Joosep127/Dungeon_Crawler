@@ -106,7 +106,29 @@ class Player:
             return(["Levelup", xp_gained])
 
         return([xp_gained])
-    
+
+    def add_spell(self, a):
+        spell = find_spell(a)
+        if isinstance(spell, dict):
+            if a in self.spells:
+                self.spells[a]["lvl"] += 1
+            else:
+                self.spells[a] = {**spell, "lvl": 1}
+
+    def info_spell(self, a):
+        if a not in self.spells:
+            print("Spell such as {a} has not been found")
+            time.sleep(1)
+            return("damage", "grass", 0, 0)
+        
+        spell = self.spells[a]
+
+        mult = spell["lvl"] ** spell["attribute"]["strength_modifier"]
+        value = round(spell["attribute"]["value"] * mult)
+        cost = round(spell["cost"] * mult)
+
+        return({"type":spell["attribute"]["type"], "element":spell["attribute"]["element"], "value":value, "cost":cost, "lvl":spell["lvl"]})
+
     def reset_afflictions(self):
         self.afflictions = {}
 
@@ -206,12 +228,6 @@ class Player:
 
         return(t0)
     
-    def add_spell(self, spell):
-        if spell in self.spells:
-            self.spells[spell] += 1
-        else:
-            self.spells[spell] = 1
-    
     def add_inventory(self, item):
         if type(item) != dict:
             self.inventory[item] = 'Equipment'
@@ -261,7 +277,16 @@ class Player:
 def find_affliction(a):
     try:
         with open("Data/Afflictions.json") as f:
-            return(f[a])
+            return(json.load(f)[a])
+    except:
+        print("No affliction was found with the name " + a)
+        time.sleep(1)
+        return None
+    
+def find_spell(a):
+    try:
+        with open("Data/Spells.json") as f:
+            return(json.load(f)[a])
     except:
         print("No affliction was found with the name " + a)
         time.sleep(1)

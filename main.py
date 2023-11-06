@@ -33,5 +33,6 @@ if __name__ == "__main__":
         for i in range(5):
             player.add_inventory({'name' : "Health Potion", 'effect' : random.randint(5,7)})
             player.add_inventory({'name' : "Mana Potion", 'effect' : random.randint(5,7)})
+            player.add_spell("Fireball")
         Fight(player)
         input("[Press ENTER to continue]")

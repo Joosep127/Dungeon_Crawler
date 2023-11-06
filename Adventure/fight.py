@@ -6,19 +6,45 @@ from Adventure.enemy import Select_Enemy, Decide_Action, Enemy_Player_Interactio
 from Adventure.misc_zones import Loot
 
 
-def Magic(player):
+def Magic(player,enemy, can_see_stats):
     spells = player.spells
     if spells == {}:
         return player, 'No spells'
-    print("\n{:^10} {:<5} {:<15} {:<5}".format("Index", "Level", "Spell", "Mana cost"))
-    for x, i in enumerate(spells.keys()):
-        print("\n{:^10} {:<5} {:<15} {:<5}".format(x, spells[i], i, "Mana cost"))
-    a = input('Select: ')
+    has_used_spells = False
+    happening = ""
+    while True:
+        Combat_Hud(player, enemy, can_see_stats)
+        print(happening)
+        print(f"{'0':^10}Exit the Spell menu")
+        print('-'*22)
+        print("{:^10} {:^5} {:^5} {:^15} {:^7} {}".format("Index", "Cost", "LVL", "Spell", "Element", "Base_effect"))
+        
 
-    if a == 0:
-        return player, "exit"
+        for x, i in enumerate(sorted(player.spells.keys()), start=1):
+            spell = player.info_spell(i)
+            print("{:^10} {:^5} [{:^5}] {:^15} {:^7} {}".format(x, spell["cost"], spell["lvl"], i, spell["element"], spell["value"]))
+        print('-'*22)
+        a = input("Select: ")
+        if not a.isdigit():
+            happening = "Please select a correct index."
+            continue
+        a = int(a)
+
+        if a == 0 and not has_used_spells:
+            return player, "exit"
+        if a == 0:
+            return player, ""
+        if 0 < a <= len(player.spells.keys()):
+            pass
+        else:
+            happening = "Please select a correct index."
+            continue
+        name = sorted(player.spells.keys())[a-1]
+        a = player.info_spell(name)
+        break
+    
+    return player, {"type":a["type"], "element":a["element"], "value":a["value"], "name":name}
 #UNFINISHED
-    return player, a
 
 def Inventory(player,enemy, can_see_stats):
     inv = {x:i for x,i in player.inventory.items() if i != 'Equipment'}
@@ -28,7 +54,7 @@ def Inventory(player,enemy, can_see_stats):
         Combat_Hud(player, enemy, can_see_stats)
         print(happening)
         print('-'*22)
-        print("{:^10} [{:<4}] {:<12} {:<5}".format("Index", "Amount", "Item", "Effectivness"))
+        print("{:^10} [{:<5}] {:<12} {:<5}".format("Index", "Amount", "Item", "Effectivness"))
         t = "\n"
         print(f"\n{'0':^10}Exit the inventory")
         print('-'*22)
@@ -65,8 +91,6 @@ def Inventory(player,enemy, can_see_stats):
         happening = player.use_inventory(dic[d], player.inventory[dic[d]][a-d])
         index -= 1
 
-    
-#UNFINISHED
 
 def Fight(player):
 
@@ -140,12 +164,20 @@ def Fight(player):
             break
         Combat_Hud(player, enemy, can_see_stats)
         print(happening)
+
+        if enemy["health"] <= 0:
+            print(f"With the {enemy['name']} as good dead you continue on your jurney.")
+            input("\n[ENTER] to continue")
+            break
+
         print("{}{:^10} {:<5}".format(t, "Index", "Action"))
         t = "\n"
         print('-'*22)
         for x,i in enumerate(options, start=1):
             print(f'{x:^10} {i:<5}')
         
+        
+
         a = input("Select: ")
         if a.isdigit():
             a = int(a)
@@ -167,7 +199,7 @@ def Fight(player):
                         time.sleep(0.4)
 
                 elif a == 'Magic':
-                    player, a = Magic(player)
+                    player, a = Magic(player,enemy, can_see_stats)
                     if a == "No spells":
                         t = "*You have no spells to Cast\n"
                         continue
@@ -197,8 +229,10 @@ def Fight(player):
             print("Please enter a number you fucking idiot.")
             time.sleep(0.4)
             continue
-
-        player, enemy, temp = Enemy_Player_Interaction(player, enemy, a.lower(), t)
+        
+        if isinstance(a, str):
+            a = a.lower()
+        player, enemy, temp = Enemy_Player_Interaction(player, enemy, a, t)
 
         if isinstance(temp, list):
             escaped = True
@@ -206,11 +240,7 @@ def Fight(player):
         else:
             happening += temp
 
-        if enemy["health"] <= 0:
-            print(happening)
-            print(f"With the {enemy['name']} as good dead you continue on your jurney.")
-            input("\n[ENTER] to continue")
-            break
+        
         
     if "undead" in player.afflictions:
         player.health *= 2
