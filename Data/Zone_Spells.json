@@ -1,0 +1,53 @@
+{
+    "Underground Forest": [
+      "Fireball",
+      "Frost Nova",
+      "Invisibility",
+      "Mind Control"
+    ],
+    "Glacier Cave": [
+      "Healing Touch",
+      "Teleportation",
+      "Lightning Strike",
+      "Ice Lance"
+    ],
+    "Haunted Grove": [
+      "Fireball",
+      "Wind Gust",
+      "Shadow Step"
+    ],
+    "Crystal Cave": [
+      "Fireball",
+      "Magmaball",
+      "Frost Nova",
+      "Teleportation"
+    ],
+    "Forgotten City": [
+      "Healing Touch",
+      "Lightning Strike",
+      "Invisibility",
+      "Wind Gust"
+    ],
+    "Subterranean Abyss": [
+      "Ice Lance",
+      "Mind Control",
+      "Shadow Step"
+    ],
+    "Abyssal Cavern": [
+      "Fireball",
+      "Invisibility",
+      "Ice Lance",
+      "Wind Gust"
+    ],
+    "Volcanic Depths": [
+      "Magmaball",
+      "Healing Touch",
+      "Frost Nova",
+      "Lightning Strike"
+    ],
+    "Eldritch Abyss": [
+      "Teleportation",
+      "Mind Control",
+      "Shadow Step"
+    ]
+  }

@@ -249,6 +249,7 @@ def Fight(player):
     player.reset_afflictions()
 
     if random.random() < 0.3 and enemy["health"] <= 0:
-        player = Loot(player, enemy["name"])
+        #player = Loot(player, enemy["name"])
+        pass
     
     return(player)

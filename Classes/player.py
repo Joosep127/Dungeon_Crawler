@@ -133,8 +133,14 @@ class Player:
         self.afflictions = {}
 
     def add_afflictions(self, a):
-        if a.keys() in self.afflictions().keys():
-            if "gain" in a.keys:
+        name = a
+        a = find_affliction(a.lower())
+        if not a:
+            print("NO AFFLICTION FOUND AS " + a)
+            time.sleep(1)
+            return
+        if name in self.afflictions():
+            if "gain" in a.keys():
                 if a["gain"] in self.afflictions():
                     return (player, f"An affliction {list(a.keys())[0]} was cast on you but you could attain it because you had an upgraded version of it already called {a.get('gain', 'unknown')}.")
                 else:

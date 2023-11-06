@@ -111,7 +111,7 @@
     },
     "Shadow Step": {
       "description": "Instantly teleport between shadows to maneuver stealthily or evade danger. deal 4x damage next attack",
-      "cost": 50,
+      "cost": 20,
       "attribute": {
         "type": "damage",
         "value": 4,
