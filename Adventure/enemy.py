@@ -85,7 +85,7 @@ def Decide_Action(enemy, player):
                 else:
                     action = "block"
         else:
-            action = random.choice("attack", "afflict")
+            action = random.choice("afflict")
     else:
         action = 'There has been a bug with the enemy INT json file. the range for INT has to be 1-4'
     return(action)
@@ -145,7 +145,7 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
             else:
                 a += f'The {enemy["name"]} was sitting on the floor when you ruthlessly cast {player_action["name"]} dealing {player_action["value"]}'
         elif player_action == 'run':
-            a = f'The {enemy["name"]} blocked thin air. you ran but he caught up with you. Unlucky'
+            a = f'While the {enemy["name"]} blocked thin air. You tried ran but he caught up with you. Unlucky'
         else:
             a = f'The {enemy["name"]} for some reason tried to block while you were standing at a reasonable distance.'
     
@@ -212,7 +212,7 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
             if enemy["health"] <= 0:
                 a += f'\nThe {enemy["name"]} enemy dealt {damage_dolen} damage to you before fainting from your attack.'
             else:
-                a += f'\nThe {enemy["name"]} got mad a your mad skills so it dealt {damage_dolen} damage to you in retaliation.'
+                a += f'\nThe {enemy["name"]} got mad at your mad skills so it dealt {damage_dolen} damage to you in retaliation.'
             
 
         elif player_action == 'run': 
@@ -225,7 +225,7 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
             if enemy['can_use_magic']:
                 a = f'The {enemy["name"]} cast a [{enemy["type"]}] type spell while you were obliviously standing there dealing {damage_dolen} damage'
             else:
-                a = f'While you were doing jackshit the {enemy["name"]} walked infront of you want kneecapped you for {damage_dolen} damage'
+                a = f'While you were doing jackshit the {enemy["name"]} walked infront of you and kneecapped you for {damage_dolen} damage'
             
     
     elif enemy_action == 'afflict':
@@ -239,14 +239,14 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
             enemy["health"] -= t
 
             if enemy["health"] <= 0:
-                a += f'The {enemy["name"]} was trying to cast an affliction on you but you being a no nonsense bossman kind of person killed him before that dealing {t} damage'
+                a += f'The {enemy["name"]} was trying to cast an affliction on you but you being a no nonsense bossman kind of person killed him before that, dealing {t} damage'
             else:
                 a += f"{temp}, while the Ass goblin(you) dealt {t}."
 
         elif isinstance(player_action, dict):
             player, enemy, a = Magic_Damage_2_Enemy(player, enemy, player_action)
             if enemy["health"] <= 0:
-                a += '\nThe {enemy["name"]} afflicted you with {temp} before fainting from your attack.'
+                a += f'\nThe {enemy["name"]} afflicted you with {temp} before fainting from your attack.'
             else:
                 a += f"\n{temp}"
         elif player_action == 'run': 

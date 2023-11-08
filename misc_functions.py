@@ -27,24 +27,57 @@ def Combat_Hud(player, enemy, can_see_stats):
         print("The object can_see_stats is broken")
         time.sleep(1)
 
+def Map_Hud(player, map, player_pos, player_seen):
+    clear()
+    print(f"{player.name}, {player.clss}")
+    print(f"Zone : {player.zone}")
+    temp = map[:player_seen]
+    print(temp[:player_pos-1] + "*" + temp[player_pos:])
+    
 
 def generate_map_string(zone_data):
-    w, n, t = random.randint(*zone_data["length"]), random.randint(*zone_data["shops"]), random.randint(*zone_data["things"])
+    w, s, t = random.randint(*zone_data["length"]), random.randint(*zone_data["shops"]), random.randint(*zone_data["things"])
     if t < 0:
         t = 0
 
-    total_positions = w
-    empty_positions = total_positions - n - t
+    m = ["_" for i in range(w)]
 
-    m = ['s' if i < n else 't' if i < n + t else ' ' for i in range(total_positions)]
+    repeats = 0
+    while s > 0:
+        i = random.randint(3,len(m)-1)
+        repeats += 1
+        if repeats > 100:
+            break
+        try:
+            if m[i] != "_" or m[i+1] == 's' or m[i-1] == 's':
+                continue
+        except:
+            continue
 
-    # Shuffle the positions
-    random.shuffle(m)
+        m[i] = 's'
 
-    # Convert to a string
-    map_string = '___'.join(m).replace(" ", "_")
+        s-= 1
 
-    return map_string
+    repeats = 0
+    while t > 0:
+
+        repeats += 1
+        if repeats > 100:
+            break
+
+        i = random.randint(3,len(m)-1)
+
+        try:
+            if m[i] != "_" or m[i+1] != '_':
+                continue
+        except:
+            continue
+
+        t -= 1
+
+        m[t] = 's'
+    
+    return '___'+''.join(m)
     
 
 def Generate_map():
@@ -56,4 +89,4 @@ def Generate_map():
     map = {i: generate_map_string(details[i]) for i in order}
     return map
 
-print(Generate_map())
+

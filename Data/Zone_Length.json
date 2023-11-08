@@ -1,46 +1,46 @@
 {
     "Underground Forest": {
-      "shops": [2, 4],
-      "length": [9, 12],
+      "shops": [3, 4],
+      "length": [12, 15],
       "things": [-2, 1]
     },
     "Glacier Cave": {
       "shops": [2, 3],
-      "length": [9, 12],
+      "length": [12, 15],
       "things": [-2, 1]
     },
     "Haunted Grove": {
-      "shops": [2, 4],
-      "length": [9, 12],
+      "shops": [2, 2],
+      "length": [12, 15],
       "things": [-2, 1]
     },
     "Crystal Cave": {
-      "shops": [2, 6],
-      "length": [9, 12],
+      "shops": [2, 3],
+      "length": [12, 15],
       "things": [-2, 1]
     },
     "Forgotten City": {
-      "shops": [5, 7],
+      "shops": [4, 5],
       "length": [20, 35],
       "things": [2, 5]
     },
     "Subterranean Abyss": {
-      "shops": [0, 0],
+      "shops": [2, 2],
       "length": [24, 26],
       "things": [-2, 1]
     },
     "Abyssal Cavern": {
-      "shops": [1, 3],
-      "length": [9, 12],
+      "shops": [2, 4],
+      "length": [12, 15],
       "things": [-2, 1]
     },
     "Volcanic Depths": {
-      "shops": [1, 3],
-      "length": [9, 12],
+      "shops": [1, 1],
+      "length": [12, 15],
       "things": [-2, 1]
     },
     "Eldritch Abyss": {
-      "shops": [1, 3],
+      "shops": [4, 6],
       "length": [50, 50],
       "things": [1, 1]
     }

@@ -156,7 +156,7 @@ def Fight(player):
         options = ['Attack' if can_attack else 'Struggle', 'Magic' if can_cast_magic else "", "Rest", 'Inventory', 'Run']
         if '' in options: options.remove('')
 
-        if escaped[0]:
+        if isinstance(escaped, bool):
             Combat_Hud(player, enemy, can_see_stats)
             print(happening)
             print('\n')

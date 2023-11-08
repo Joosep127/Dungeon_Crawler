@@ -237,12 +237,14 @@ class Player:
     def add_inventory(self, item):
         if type(item) != dict:
             self.inventory[item] = 'Equipment'
+            return
         elif item["name"] in self.inventory:
             self.inventory[item["name"]].append(item["effect"])
         else:
             self.inventory[item["name"]] = [item["effect"]]
         for i in self.inventory:
-            self.inventory[i].sort()
+            if isinstance(self.inventory[i], list):
+                self.inventory[i].sort()
     
     def use_inventory(self, item_name, value):
         if item_name == "Health Potion":
@@ -316,41 +318,41 @@ def Create():
     game_classes = {
     'The Regular Guy': {
         'name': '*Has a ketchup stain on his shirt',
-        'health': 50,
-        'mana': 50,
-        'damage': 5,
+        'health': 500,
+        'mana': 25,
+        'damage': 50,
         'coin': 100,
         'multipliers': {}
     },
     'The Thief': {
         'name': '*Is decked out with handbags and whatnot from having stolen soo much loot from old ladies',
-        'health': 40,
-        'mana': 100,
-        'damage': 5,
+        'health': 400,
+        'mana': 10,
+        'damage': 50,
         'coin': 50,
         'multipliers': {"coin": 2.0}
     },
     'The Knight': {
         'name': "*Despite the sword's steel blade haven fallen off from countless battles, he still uses the wooden handle to beat monsters into submission",
-        'health': 45,
+        'health': 450,
         'mana': 30,
-        'damage': 7,
+        'damage': 70,
         'coin': 200,
         'multipliers': {}
     },
     'The Rogue': {
         'name': '*Fast and agile, adapts.',
-        'health': 50,
+        'health': 500,
         'mana': 70,
-        'damage': 7,
+        'damage': 70,
         'coin': 75,
         'multipliers': {"xp": 2.7, "dmg": 2, "hp": 4, "lvl_up": 1.35,}
     },
     'The Physically Ill': {
         'name': '*Has the sniffles ): ',
-        'health': 20,
+        'health': 200,
         'mana': 10,
-        'damage': 5,
+        'damage': 50,
         'coin': 10,
         'multipliers': {"xp": 0.7, "dmg": 1, "hp": 1, "mana": 1, "lvl_up": 1.65, "coin": 0.7}
     }    
@@ -391,7 +393,5 @@ def Create():
 
     for j, i in multipliers.items():
         player.multipliers[j] = i
-
-    player.zone = random.choice(['Underground Forest','Glacier Cave','Haunted Grove'])
 
     return player
