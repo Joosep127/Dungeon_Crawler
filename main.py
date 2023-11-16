@@ -23,14 +23,12 @@ def Main():
         print("You one day decide to go to work, but you fell in to a hole.\n")
     input("[Press enter to continue]")
     
-    Map = Generate_map()
-
-    #Map = {'Underground Forest': "__s_"}
+    Map = Generate_map(player.zone)
 
     player_pos = 1
     player_seen = 0
     shops = {}
-    for x, i in enumerate(Map[player.zone]):
+    for x, i in enumerate(Map):
         if i == "s":
             shops[str(x)] = Generate_Shop_Inv(player.depth, player.multipliers['equipment'])
     
@@ -42,9 +40,9 @@ def Main():
             if player_seen < player_pos-1:
                  player_seen = player_pos
 
-            options = ["Enter Shop" if Map[player.zone][player_pos] == "s" else "", "Move Forward" if player_pos < len(Map[player.zone]) else "Go to next Zone", "Go Backwards" if player_pos != 0 else "", "Set up camp"]
+            options = ["Move Forward" if player_pos < len(Map) else "Leave Current Zone", "Go Backwards" if player_pos != 0 else "-", "Open inventory.", "Enter Shop" if Map[player_pos] == "s" else ""]
             options = [i for i in options if i != ""]
-            Map_Hud(player, Map[player.zone], player_pos, player_seen)
+            Map_Hud(player, Map, player_pos, player_seen)
 
             print("Index  Command")
             for x, i in enumerate(options, start=1):
@@ -59,12 +57,22 @@ def Main():
             
             if a == 'Move Forward':
                 player_pos += 1
+                t = "You wandered around for a good while"
             elif a == 'Go Backwards':
                 player_pos -= 1
+                t = "You walked backwards for an indeterminate amount of time"
             elif a == "Set up camp":
-                print('Setting up camp.')
+                t = "You're back on your journey"
             elif a == "Enter Shop":
                 Shop(player, shops[str(player_pos)])
+                t = "You left the shop"
+                continue
+            elif a == "Leave Current Zone":
+                player_pos = 1
+                player_seen = 0
+                player, t = Choose_Zone(player)
+                Map = Generate_map(player.zone)
+                continue
 
             if random.random() < 0.3:
                 Fight(player)
