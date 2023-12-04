@@ -53,7 +53,7 @@ class Player:
         self.timer = 0 #How long you have stayed in one zone
 
     def cal_damage(self):
-        return( (self.equipment_damage() + self.damage + self.affliction_multipliers["do_damage_additive"])* self.affliction_multipliers['do_damage'])
+        return( (self.equipment_damage()**self.affliction_multipliers['do_damage'] + self.damage + self.affliction_multipliers["do_damage_additive"])* self.affliction_multipliers['do_damage'])
     
     def cal_defence(self):
         return(sum([self.equipment[i].stat for i in self.equipment.keys() if i != 'Sword' and self.equipment[i] is not None]))
