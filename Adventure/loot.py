@@ -7,7 +7,7 @@ clear = lambda: os.system('cls')
 def Zone_Loot(player):
     t = "Upon leaving the zone you see a window open before your eyes. \nWhat do you get?: "
     while True:
-        option = ["New Sword", "Magic Power", "Strength"]
+        option = ['New equipment', "Magic Power", "Strength"]
         print("{:^10} {:<5}".format("Index", "Action"))
         print('-'*22)
         for x,i in enumerate(options, start=1):
@@ -20,9 +20,9 @@ def Zone_Loot(player):
             if 0 <= int(a)-1 < len(options):
                 a = options[a-1]
                 
-                if a == 'New Sword':
-                    sword = Equipment_create("Sword")
-                    input(f'You got a new Sword! {sword.name} with the damage stat of {sword.stat}. It has been added to your inventory\n[Enter To Continue]')
+                if a == 'New equipment':
+                    sword =  Equipment_create((random.randint(0,10)+10*player.level)**(player.depth*2-1))
+                    input(f'You got a new {sword.name}! {sword.name} with the damage stat of {sword.stat}. It has been added to your inventory\n[Enter To Continue]')
                     player.add_inventory(sword)
                 elif a == "Magic Power":
                     if random.random <= 0.2:
@@ -37,10 +37,9 @@ def Zone_Loot(player):
                 elif a == "Strength":
                     if random.random <= 0.2:
                         player.affliction_multipliers["do_damage"] += 0.1
-                        input(f"You now hit with more damage. Veeeri Stronk (:\n[Enter To Continue]")
                     else:
                         player.affliction_multipliers["do_damage_additive"] += 5
-                        input(f"You now hit with more damage. Veeeri Stronk (:\n[Enter To Continue]")
+                    input(f"You now hit with more damage. Veeeri Stronk (:\n[Enter To Continue]")
 
 
             else:
@@ -61,7 +60,7 @@ def Enemy_Loot(player):
         player.add_spell(spell)
         input(f"The Enemy dropped you forgotten knowladge. A new Spell called {spell}!!\n[Enter To Continue]")
     elif a <= 0.5:
-        eq = Equipment_create()
+        eq =  Equipment_create((random.randint(0,10)+10*player.level)**(player.depth*2-1))
         input(f'The enemy dropped a new {eq.type}! {eq.name} with the stat of {eq.stat}. It has been added to your inventory\n[Enter To Continue]')
         player.add_inventory(eq)
 
@@ -84,7 +83,8 @@ def Level_Up(player):
                 a = options[a-1]
                 
                 if a == 'New Sword':
-                    sword = Equipment_create("Sword")
+
+                    sword = Equipment_create((random.randint(0,10)+10*player.level)**(player.depth*2-1),"Sword")
                     input(f'You got a new Sword! {sword.name} with the damage stat of {sword.stat}. It has been added to your inventory\n[Enter To Continue]')
                     player.add_inventory(sword)
                 elif a == "Magic Power":
