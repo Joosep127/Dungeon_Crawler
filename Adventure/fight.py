@@ -244,6 +244,10 @@ def Fight(player):
         
         if isinstance(a, str):
             a = a.lower()
+
+        if a in {"Magic","Rest","Fight"}:
+            player.add_skill(a.lower())
+
         player, enemy, temp = Enemy_Player_Interaction(player, enemy, a, t)
 
         if isinstance(temp, list):

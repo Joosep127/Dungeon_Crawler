@@ -1,5 +1,6 @@
 import random
 from Classes import Equipment_create
+import json
 import os
 clear = lambda: os.system('cls')
 
@@ -25,7 +26,22 @@ def Level_Up(player):
                     input(f'You got a new Sword! {sword.name} with the damage stat of {sword.stat}. It has been added to your inventory\n[Enter To Continue]')
                     player.add_inventory(sword)
                 elif a == "Magic Power":
-                
+                    if random.random <= 0.2:
+                        with open("Data/Zone_Spells.json") as f:
+                            spell = random.choice(json.load(f)[player.zone])
+                        player.add_spell(spell)
+                        input(f"Because you're so talented you gained a {spell} from your current zone.\n[Enter To Continue]")
+                    else:
+                        player.max_mana += 10
+                        player.add_skills["magic"] += 30
+                        input(f"You failed at being talented but you gained 10 max mana and experience in casting magic")
+                elif a == "Strength":
+                    if random.random <= 0.2:
+                        player.affliction_multipliers["do_damage"] += 0.1
+                        input(f"You now hit with more damage. Veeeri Stronk (:\n[Enter To Continue]")
+                    else:
+                        player.affliction_multipliers["do_damage_additive"] += 5
+                        input(f"You now hit with more damage. Veeeri Stronk (:\n[Enter To Continue]")
 
 
             else:

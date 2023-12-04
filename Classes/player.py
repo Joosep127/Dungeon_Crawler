@@ -44,7 +44,7 @@ class Player:
             "do_damage_additive" : 0,
             "take_damage" : 1.0
         }
-        self.skills = Counter()
+        self.skills = Counter(fight=0,magic=0,rest=0)
         self.spells = {}
         self.afflictions = {}
         self.inventory = {}
@@ -53,7 +53,7 @@ class Player:
         self.timer = 0 #How long you have stayed in one zone
 
     def cal_damage(self):
-        return( (self.equipment_damage()**self.affliction_multipliers['do_damage'] + self.damage + self.affliction_multipliers["do_damage_additive"])* self.affliction_multipliers['do_damage'])
+        return( (self.equipment_damage() + self.damage**self.affliction_multipliers['do_damage'] + self.affliction_multipliers["do_damage_additive"])**self.affliction_multipliers['do_damage'])
     
     def cal_defence(self):
         return(sum([self.equipment[i].stat for i in self.equipment.keys() if i != 'Sword' and self.equipment[i] is not None]))
@@ -290,6 +290,11 @@ class Player:
         if self.equipment['Sword'] == None:
             return(0)
         return(self.equipment['sword'].stat)
+
+    def add_skill(self, a):
+        if a in self.skills:
+            self.skills[a] += 1
+
 
 def find_affliction(a):
     try:
