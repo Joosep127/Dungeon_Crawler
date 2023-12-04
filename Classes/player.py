@@ -1,8 +1,10 @@
 from math import floor
 import json
 from collections import Counter
+from Adventure.loot import Loot
 import os
 import time
+
 clear = lambda: os.system('cls')
 
 def Debug_Create(name, health, mana, damage, coin, clss):
@@ -94,6 +96,7 @@ class Player:
         xp_gained = floor(add * self.multipliers["xp"])
         self.xp += xp_gained
         base_xp = floor(20 * (self.multipliers["lvl_up"] ** (self.level - 1)))
+        lvl = False
 
         while self.xp >= base_xp:
             self.xp -= base_xp
@@ -103,9 +106,12 @@ class Player:
             self.max_mana += self.multipliers["mana"]
             self.mana = self.max_mana
             self.damage += self.multipliers["dmg"]
+            self = Loot(self, "Levelup")
+            lvl = True
+            
+        if lvl:
             return(["Levelup", xp_gained])
-
-        return([xp_gained])
+        return(["",xp_gained])
 
     def add_spell(self, a):
         spell = find_spell(a)

@@ -3,7 +3,7 @@ import json
 import random
 from misc_functions import Combat_Hud
 from Adventure.enemy import Select_Enemy, Decide_Action, Enemy_Player_Interaction
-from Adventure.misc_zones import Loot
+from Adventure.loot import Loot
 
 
 def Magic(player,enemy, can_see_stats):
@@ -248,8 +248,9 @@ def Fight(player):
 
     player.reset_afflictions()
 
+    player.xp_add()
+
     if random.random() < 0.3 and enemy["health"] <= 0:
-        #player = Loot(player, enemy["name"])
-        pass
+        player = Loot(player, "Enemy")
     
     return(player)

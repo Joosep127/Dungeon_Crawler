@@ -3,7 +3,7 @@ import os
 import json
 import random
 from Classes.player import Debug_Create 
-from Adventure.misc_zones import Loot
+from Adventure.loot import Loot
 clear = lambda: os.system('cls')
 
 def Hud(player):
@@ -146,7 +146,7 @@ def Choose_Zone(player):
         if a == "Loot":
             options.remove("Loot")
             t = "You looted the Chest"
-            player = Loot(player)
+            player = Loot(player, "Zone")
         elif a == "Jump down a deeper hole (progress)":
             player.depth += 1
             player.timer = 0
