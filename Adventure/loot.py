@@ -116,6 +116,13 @@ def Level_Up(player):
         
     return player
 
+def None_Loot(player):
+    with open("Data/Spells.json") as f:
+        spell = random.choice(json.load(f).keys)
+    player.add_spell(spell)
+    input(f"Because you're so talented you gained a {spell}.\n[Enter To Continue]")
+    return(player)
+
 def Loot(player, condition="None"):
     if condition == "Zone":
         player = Zone_Loot(player)
@@ -124,5 +131,5 @@ def Loot(player, condition="None"):
     elif condition == "Levelup":
         player = Level_Up(player)
     elif condition == "None":
-        pass
+        player = None_Loot(player) # Gives a random spell
     return(player)
