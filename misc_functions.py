@@ -92,6 +92,9 @@ def Generate_map(zone):
 
 def Choose_Zone(player):
     clear()
+
+    tempo = False
+    
     with open("Data\Zone_Order.json", "r") as f:
         zones = json.load(f)[str(player.depth)]
 
@@ -103,13 +106,20 @@ def Choose_Zone(player):
             zones.remove(player.zone)
             del zones[random.randint(0, len(zones) - 1)]
     else:
-        zones = [zones[random.randint(0, len(zones) - 1)]]
+        zones = random.choice(zones)
 
     options = [
             "Loot" if random.random() < 0.3 * player.multipliers["luck"] and player.timer != 0 else "",
             *zones,
             "Jump down a deeper hole (progress)" if random.random() < 0.5 and player.timer != 0 and player.depth != 3 else ""
                 ]
+    
+    if tempo and random.random <= 0.8:
+        options = [
+            *zones,
+            "Go towards the light"
+                ]
+
     options = [i for i in options if i != ""]
 
     descriptions = {}
@@ -143,7 +153,10 @@ def Choose_Zone(player):
         t = ''
         a = options[int(a)-1]
         
-        if a == "Loot":
+        if a == "Go towards the light":
+            pass
+
+        elif a == "Loot":
             options.remove("Loot")
             t = "You looted the Chest"
             player = Loot(player, "Zone")

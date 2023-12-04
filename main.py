@@ -38,11 +38,14 @@ def Main():
         
         t = ""
         while True:
+            
+
             if player_seen < player_pos-1:
                  player_seen = player_pos
 
             options = ["Move Forward" if player_pos < len(Map) else "Leave Current Zone", "Go Backwards" if player_pos != 0 else "-", "Open inventory.", "Enter Shop" if Map[player_pos-1] == "s" else ""]
             options = [i for i in options if i != ""]
+
             Map_Hud(player, Map, player_pos, player_seen)
 
             print("Index  Command")
