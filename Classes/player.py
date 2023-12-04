@@ -57,20 +57,21 @@ class Player:
     
     def cal_defence(self):
         return(sum([self.equipment[i].stat for i in self.equipment.keys() if i != 'Sword' and self.equipment[i] is not None]))
-
     
     def add_coin(self, add):
         self.coin += add * self.multipliers["coin"]
         
-    def lose_hp(self, lost, *args):
+    def lose_hp(self, lost, args=()):
         lost *= self.affliction_multipliers['take_damage']
         self.health -= lost
         
         if self.health <= 0:
             if args == ():
                 print('You died due to a heart attack\n\n')
-            elif args[0] == "affliction":
+            elif args == "affliction":
                 print('You died due to your afflictions\n\n')
+            elif args == "stupid":
+                print('You died due to your own stupidity :P\n\n')
                 
             input("[ENTER] to close the game")
             exit()

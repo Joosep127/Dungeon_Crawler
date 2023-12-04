@@ -123,6 +123,7 @@ def Fight(player):
         if t == "\n":
 
             is_slip = False
+            hit_yourself = False
             can_see_stats = True
             can_attack = True
             can_cast_magic = True
@@ -138,6 +139,9 @@ def Fight(player):
                     is_slip = True
                 elif i["type"] == 'cant_see_enemy_stats':
                     can_see_stats = False
+                elif i["type"] == 'hit_yourself':
+                    if random.random() <= i["chance"]:
+                        hit_yourself = i["value"]
 
             happening += player.round_start()
 
@@ -190,6 +194,13 @@ def Fight(player):
                             print("Due to it being extremely slippery you slipped and your attack was canceled ♿. The enemy got an extra turn.")
                             a = ''
                             time.sleep(0.8)
+                    if hit_yourself:
+                        d = player.cal_damage
+                        print("Because of your low IQ brain you hit yourself for {d}. The enemy got an extra turn.")
+                        player.lose_hp(d, "stupid")
+                        a = ''
+                        time.sleep(0.8)
+
                 elif a == 'Struggle':
                     if (random.random()*10)**(1+player.multipliers["luck"])/10 < 0.8:
                         del player.afflictions[afflicted_attack]
@@ -240,6 +251,11 @@ def Fight(player):
             happening += temp[1]
         else:
             happening += temp
+
+        
+                    
+
+
 
         
         

@@ -54,7 +54,6 @@
     "cursed": {
         "type": "hit_yourself",
         "value": 0.5,
-        "operator": "multiplicative",
         "chance": 0.3
     },
     "darkness": {

@@ -24,6 +24,8 @@ def Level_Up(player):
                     sword = Equipment_create()
                     input(f'You got a new Sword! {sword.name} with the damage stat of {sword.stat}. It has been added to your inventory\n[Enter To Continue]')
                     player.add_inventory(sword)
+                elif a == "Magic Power":
+                
 
 
             else:

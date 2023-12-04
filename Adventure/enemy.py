@@ -253,6 +253,8 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
             a = f"{temp}, while you were trying to run away. The enemy despite this caught up with you."
         else:
             a = f"{temp}, while you were standing at a reasonable distance."
+    
+    
     if isinstance(a, list):
         return player, enemy, a
     return player, enemy, a + message
