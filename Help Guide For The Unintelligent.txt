@@ -44,6 +44,24 @@ Enemy format = {
 'afflictions': []
 }
 
+spell format = 
+"Fireball": {
+      "description": "Launch a fiery projectile at your target, causing an explosion on impact.",
+      "cost": 10,
+      "attribute": {
+        "type": "damage",
+        "value": 50,
+        "strength_modifier": 1.2,
+        "element": "Fire"
+      }
+      "lvl": 1
+}
+
+
+Inventory = {'name' : ['effect', 'effect', 'effect',...],
+	     'name' : ['effect', 'effect', 'effect',...],
+	     object : 'Equipment',
+	     object : 'Equipment'}
 
 #Fight Hud
 Joe, The man			|	Goblin

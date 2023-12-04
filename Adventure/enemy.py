@@ -10,7 +10,7 @@ def Select_Enemy(depth, zone):
     return {**a[key], 'name': key, 'max_health': a[key]["health"], 'weaknesses': d, 'afflictions': []}
 
 def Affliction_Select(player):
-    with open("Data/Gain_Afflictions.json", 'r') as f:
+    with open("Data/Gain_Affliction.json", 'r') as f:
         a = json.load(f)[player.zone]
     return(player.add_afflictions(a))
 
@@ -54,7 +54,7 @@ def Damage_Dolen(enemy):
         damage_dolen = max(damage_dolen * enemy['int'] / 4, minimum_damage)
     else:
         damage_dolen = max(round(enemy["attack"] * enemy['int'] / 4 * (1 - random.uniform(*enemy['attack_health_modifier_range']))),1)
-    return(damage_dolen)
+    return(round(damage_dolen))
 
 def Decide_Action(enemy, player):
     if enemy["int"] == 1:
@@ -162,10 +162,10 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
 
             enemy["health"] -= t
             if enemy["health"] <= 0:
-                a += f'The {enemy["name"]} tried to heal itself but you ruthlessly killed it with {t} damage before it could.'
+                a = f'The {enemy["name"]} tried to heal itself but you ruthlessly killed it with {t} damage before it could.'
             else:
                 enemy["health"] += healt
-                a += f'You battered The {enemy["name"]} with {t} damage, but he healed for {healt}'
+                a = f'You battered The {enemy["name"]} with {t} damage, but he healed for {healt}'
         elif player_action == 'run':
             a = f'The {enemy["name"]} was healing itself when you started booking it but he somehow caught up with you. Unlucky'
         elif isinstance(player_action, dict):

@@ -83,16 +83,17 @@ def Generate_map(zone):
     with open("Data\Zone_Length.json", "r") as f:
         details = json.load(f)
     
-    if zone != details:
+    if zone not in details.keys():
         print(f"No zone such as - {zone}")
         time.sleep(1)
         return None
 
-    return generate_map_string(details[i])
+    return generate_map_string(details[zone])
 
 def Choose_Zone(player):
-    with open("Data\Zone_Length.json", "r") as f:
-        zones = json.load(f)[player.depth]
+    clear()
+    with open("Data\Zone_Order.json", "r") as f:
+        zones = json.load(f)[str(player.depth)]
 
     if player.zone != None:
         a = random.randint(0,2)
@@ -104,24 +105,36 @@ def Choose_Zone(player):
     else:
         zones = [zones[random.randint(0, len(zones) - 1)]]
 
-    options = ["Loot" if random.random() < 0.3*player.multipliers["luck"] and player.timer != 0 else "Empty", f"Path.{i}" for i in range(len(zones), start=1), "Jump down a deeper hole (progress)" if random.random() < 0.5 and player.timer != 0 and player.depth != 3 else ""]
+    options = [
+            "Loot" if random.random() < 0.3 * player.multipliers["luck"] and player.timer != 0 else "",
+            *zones,
+            "Jump down a deeper hole (progress)" if random.random() < 0.5 and player.timer != 0 and player.depth != 3 else ""
+                ]
     options = [i for i in options if i != ""]
 
-    descriptions = []
+    descriptions = {}
     with open("Data\Zone_Descriptions.json", "r") as f:
+        a = json.load(f)
         for i in zones:
-            descriptions.append(json.load(f)[i])
+            descriptions[i] = a[i]
 
     t = ''
 
     while True:
 
-        print("Index  Command")
+        print('Leaving Current Zone..\n\n')
+
+        print("{:^10} {:<5}".format("Index", "Path"))
+        print('-'*22)
         for x, i in enumerate(options, start=1):
-            print(f"{x:5} {i}")
-        print("\n"+t+"\n")
+            print("{:^10} {}".format(x, i))
+        print()
         for x, i in enumerate(zones):
-            print(f'Path.{i} - {descriptions[x]["path_description"]}')
+            print(f'{i} - "{descriptions[i]["path_description"]}"')
+
+
+        print("\n"+t+"\n")
+        t = ""
 
         a = input(f"\nSelect: ")
         if not a.isdigit() or not 0 < int(a) <= len(options):
@@ -139,9 +152,9 @@ def Choose_Zone(player):
             player.timer = 0
             player.zone = None
             return Choose_Zone(player)
-        else:
-            player.zone = zones(int(a[5])-1)
-            t = descriptions[x]["chosen_description"]
+        elif a in descriptions:
+            player.zone = a
+            t = descriptions[a]["chosen_description"]
             break
 
     return player, t

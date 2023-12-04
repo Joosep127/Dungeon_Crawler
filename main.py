@@ -1,7 +1,7 @@
 import os
 from math import floor
 from Classes.player import Create, Debug_Create 
-from misc_functions import Hud, Generate_map, Map_Hud
+from misc_functions import Hud, Generate_map, Map_Hud, Choose_Zone
 from Adventure.fight import Fight
 from Adventure.shop import Shop,Generate_Shop_Inv
 import random
@@ -23,7 +23,8 @@ def Main():
         print("You one day decide to go to work, but you fell in to a hole.\n")
     input("[Press enter to continue]")
     
-    Map = Generate_map(player.zone)
+    #Map = Generate_map(player.zone)
+    Map = "_s_"
 
     player_pos = 1
     player_seen = 0
@@ -40,7 +41,7 @@ def Main():
             if player_seen < player_pos-1:
                  player_seen = player_pos
 
-            options = ["Move Forward" if player_pos < len(Map) else "Leave Current Zone", "Go Backwards" if player_pos != 0 else "-", "Open inventory.", "Enter Shop" if Map[player_pos] == "s" else ""]
+            options = ["Move Forward" if player_pos < len(Map) else "Leave Current Zone", "Go Backwards" if player_pos != 0 else "-", "Open inventory.", "Enter Shop" if Map[player_pos-1] == "s" else ""]
             options = [i for i in options if i != ""]
             Map_Hud(player, Map, player_pos, player_seen)
 
@@ -58,11 +59,14 @@ def Main():
             if a == 'Move Forward':
                 player_pos += 1
                 t = "You wandered around for a good while"
+                player.timer += 1
             elif a == 'Go Backwards':
                 player_pos -= 1
                 t = "You walked backwards for an indeterminate amount of time"
+                player.timer += 1
             elif a == "Set up camp":
                 t = "You're back on your journey"
+                continue
             elif a == "Enter Shop":
                 Shop(player, shops[str(player_pos)])
                 t = "You left the shop"
