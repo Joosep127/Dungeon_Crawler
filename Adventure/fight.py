@@ -47,7 +47,7 @@ def Magic(player,enemy, can_see_stats):
 #UNFINISHED
 
 def Inventory(player,enemy, can_see_stats):
-    inv = {x:i for x,i in player.inventory.items() if i != 'Equipment'}
+    inv = {x:i for x,i in player.inventory.items() if not isinstance(i[0], object)}
     has_consumed_item = False
     happening = "\n"
     while True:

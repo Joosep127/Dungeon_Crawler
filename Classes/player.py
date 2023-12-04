@@ -47,7 +47,7 @@ class Player:
         self.skills = Counter(fight=0,magic=0,rest=0)
         self.spells = {}
         self.afflictions = {}
-        self.inventory = {}
+        self.inventory = {"Equipment": []}
         self.depth = 1
         self.zone = None
         self.timer = 0 #How long you have stayed in one zone
@@ -246,7 +246,7 @@ class Player:
     
     def add_inventory(self, item):
         if type(item) != dict:
-            self.inventory[item] = 'Equipment'
+            self.inventory["Equipment"].append(item)
             return
         elif item["name"] in self.inventory:
             self.inventory[item["name"]].append(item["effect"])
@@ -273,7 +273,7 @@ class Player:
             print("[ERROR]Item that you wanted to remove does not exist in your invetory")
             time.sleep(2)
             return()
-        if self.inventory[item["name"]] == "Equipment":
+        if self.inventory["Equipment"] == :
             del self.inventory[item["name"]]
             return()
         self.inventory[item["name"]].remove(item["effect"])
