@@ -4,6 +4,19 @@ import json
 import os
 clear = lambda: os.system('cls')
 
+def Enemy_Loot(player):
+    a = random.random
+    if a <= 0.1:
+        with open("Data/Zone_Spells.json") as f:
+            spell = random.choice(json.load(f)[player.zone])
+        player.add_spell(spell)
+        input(f"The Enemy dropped you forgotten knowladge. A new Spell called {spell}!!\n[Enter To Continue]")
+    elif a <= 0.5:
+        eq = Equipment_create()
+        input(f'The enemy dropped a new {eq.type}! {eq.name} with the stat of {eq.stat}. It has been added to your inventory\n[Enter To Continue]')
+        player.add_inventory(eq)
+
+    return(player)
 
 def Level_Up(player):
     t = ''
@@ -22,7 +35,7 @@ def Level_Up(player):
                 a = options[a-1]
                 
                 if a == 'New Sword':
-                    sword = Equipment_create()
+                    sword = Equipment_create("Sword")
                     input(f'You got a new Sword! {sword.name} with the damage stat of {sword.stat}. It has been added to your inventory\n[Enter To Continue]')
                     player.add_inventory(sword)
                 elif a == "Magic Power":
@@ -58,7 +71,7 @@ def Loot(player, condition="None"):
     if condition == "Zone":
         pass
     elif condition == "Enemy":
-        pass
+        player = Enemy_Loot(player)
     elif condition == "Levelup":
         player = Level_Up(player)
     elif condition == "None":
