@@ -51,6 +51,7 @@ class Player:
         self.depth = 1
         self.zone = None
         self.timer = 0 #How long you have stayed in one zone
+        self.conditionals = []
 
     def cal_damage(self):
         return( (self.equipment_damage() + self.damage**self.affliction_multipliers['do_damage'] + self.affliction_multipliers["do_damage_additive"])**self.affliction_multipliers['do_damage'])

@@ -7,7 +7,7 @@ clear = lambda: os.system('cls')
 def Zone_Loot(player):
     t = "Upon leaving the zone you see a window open before your eyes. \nWhat do you get?: "
     while True:
-        option = ['New equipment', "Magic Power", "Strength"]
+        options = ['New equipment', "Magic Power", "Strength"]
         print("{:^10} {:<5}".format("Index", "Action"))
         print('-'*22)
         for x,i in enumerate(options, start=1):
@@ -69,10 +69,10 @@ def Enemy_Loot(player):
 def Level_Up(player):
     t = "Upon leveling up you see a window open before your eyes. \nWhat do you get?: "
     while True:
-        option = ["New Sword", "Magic Power", "Strength"]
+        options = ["New Sword", "Magic Power", "Strength"]
         print("{:^10} {:<5}".format("Index", "Action"))
         print('-'*22)
-        for x,i in enumerate(option, start=1):
+        for x,i in enumerate(options, start=1):
             print(f'{x:^10} {i:<5}')
         print(t)
         t = "\nWhat do you get?: "

@@ -91,6 +91,7 @@ def Generate_map(zone):
     return generate_map_string(details[zone])
 
 def Choose_Zone(player):
+
     clear()
 
     tempo = False
@@ -172,3 +173,33 @@ def Choose_Zone(player):
             break
 
     return player, t
+
+def Set_Camp(player):
+    happening = '\n'
+    while True:
+        clear()
+        options = ['Inventory', 'Upgrade(Once per zone)' if 'Upgrade(Once per zone)' in player.conditionals else '', 'Rest(once per zone)'if 'Rest(once per zone)' in player.conditionals else '', 'Hunt']
+        if '' in options: options.remove('')
+
+        print(f"{player.name}, {player.clss}")
+        print(f"Hp: {player.health}/{player.max_health} | Magic: {player.mana}/{player.max_mana} | {player.coin}$ | Lvl: {player.level}")
+        print(f'Helmet    : {player.equipment["Helmet"].stat:^10};  {player.equipment["Helmet"].name}')
+        print(f'Chestplate: {player.equipment["Chestplate"].stat:^10};  {player.equipment["Chestplate"].name}')
+        print(f'Leggings  : {player.equipment["Leggings"].stat:^10};  {player.equipment["Leggings"].name}')
+        print(f'Boots     : {player.equipment["Boots"].stat:^10};  {player.equipment["Boots"].name}')
+        print(f'Sword     : {player.equipment["Sword"].stat:^10};  {player.equipment["Sword"].name}')
+        print('-'*22)
+        print("{:^10} {:^5}\n".format("Index", "Options"))
+        print(f"{'0':^10}Exit\n")        
+        print('- '*11)
+        print(happening)
+        a = input("Select: ")
+        if not a.isdigit():
+            happening = "\nPlease select a correct index."
+            continue
+        if a == 0:
+            break
+        a = options[int(a)]
+
+        
+    return(player)

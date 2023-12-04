@@ -1,7 +1,7 @@
 import os
 from math import floor
 from Classes.player import Create, Debug_Create 
-from misc_functions import Hud, Generate_map, Map_Hud, Choose_Zone
+from misc_functions import Hud, Generate_map, Map_Hud, Choose_Zone, Set_Camp
 from Adventure.fight import Fight
 from Adventure.shop import Shop,Generate_Shop_Inv
 import random
@@ -68,6 +68,7 @@ def Main():
                 t = "You walked backwards for an indeterminate amount of time"
                 player.timer += 1
             elif a == "Set up camp":
+                player = Set_Camp(player)
                 t = "You're back on your journey"
                 continue
             elif a == "Enter Shop":
