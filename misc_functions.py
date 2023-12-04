@@ -3,6 +3,7 @@ import os
 import json
 import random
 from Classes.player import Debug_Create 
+from Adventure.fight import Fight
 from Adventure.loot import Loot
 clear = lambda: os.system('cls')
 
@@ -201,5 +202,44 @@ def Set_Camp(player):
             break
         a = options[int(a)]
 
-        
+        if a == "Inventory":
+            pass
+
+        elif a == 'Upgrade(Once per zone)':
+
+            temp = input(f"Pick something to upgrade [Helmet, Chestplate, ...] or 0 to exit.\nSelect:")
+            if temp == "0":
+                happening = "\nYou stopped upgrading."
+            
+            if temp in player.equipment.keys():
+                if "+" not in player.equipment[temp].name:
+                    player.conditionals.append('Upgrade(Once per zone)')
+                    print(".")
+                    time.sleep(0.2)
+                    print("..")
+                    time.sleep(0.2)
+                    print("...")
+                    player.equipment[temp].name += "+"
+                    player.equipment[temp].stat = round(player.equipment[temp].stat*1.5)
+                else:
+                    happening = "This equipment has already been upgraded"
+            else:
+                happening = "\nYou stopped upgrading."
+
+        elif a == 'Rest(once per zone)':
+            player.conditionals.append('Rest(once per zone)')
+            print(".")
+            time.sleep(0.2)
+            print("..")
+            time.sleep(0.2)
+            print("...")
+            time.sleep(0.2)
+            h = (player.max_health-player.health)/0.3
+            input(f"You gained {h} hp from resting.\n[ENTER to continue]")
+
+        elif a == 'Hunt':
+            player = Fight(player)
+
+
+
     return(player)
