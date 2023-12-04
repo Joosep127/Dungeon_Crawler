@@ -94,6 +94,7 @@ class Player:
 
     def add_xp(self, add):
         xp_gained = floor(add * self.multipliers["xp"])
+        print(f"You gained {xp_gained} xp.")
         self.xp += xp_gained
         base_xp = floor(20 * (self.multipliers["lvl_up"] ** (self.level - 1)))
         lvl = False
@@ -106,12 +107,13 @@ class Player:
             self.max_mana += self.multipliers["mana"]
             self.mana = self.max_mana
             self.damage += self.multipliers["dmg"]
+            print("Level Up!")
             self = Loot(self, "Levelup")
             lvl = True
             
         if lvl:
             return(["Levelup", xp_gained])
-        return(["",xp_gained])
+        return(["None",xp_gained])
 
     def add_spell(self, a):
         spell = find_spell(a)

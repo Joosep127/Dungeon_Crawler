@@ -96,6 +96,7 @@ def Fight(player):
 
     escaped = [False]
     enemy = Select_Enemy(str(player.depth), player.zone)
+    xp_to_add = round(enemy["health"]/5)
     happening = "\n\n\n\n\n"
     happening += random.choice([
     f"You walk upon the {enemy['name']}.",
@@ -248,7 +249,9 @@ def Fight(player):
 
     player.reset_afflictions()
 
-    player.xp_add()
+    
+    player.xp_add(xp_to_add)
+
 
     if random.random() < 0.3 and enemy["health"] <= 0:
         player = Loot(player, "Enemy")
