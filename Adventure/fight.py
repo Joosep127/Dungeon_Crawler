@@ -270,7 +270,7 @@ def Fight(player):
     player.reset_afflictions()
 
     
-    player.xp_add(xp_to_add)
+    player.add_xp(xp_to_add)
 
 
     if random.random() < 0.3 and enemy["health"] <= 0:

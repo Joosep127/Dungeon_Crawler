@@ -79,10 +79,17 @@ def Main():
                 player_seen = 0
                 player, t = Choose_Zone(player)
                 Map = Generate_map(player.zone)
+                if t == "end":
+                    break
                 continue
 
             if random.random() < 0.3:
                 Fight(player)
+        break
+    
+    print("Here are your stats for this play through.")
+    print(player)
+    input("[ENTER] TO END THE GAME")
 
 
 

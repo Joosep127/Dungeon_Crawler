@@ -154,7 +154,8 @@ def Choose_Zone(player):
         a = options[int(a)-1]
         
         if a == "Go towards the light":
-            pass
+            t = "end"
+            break
 
         elif a == "Loot":
             options.remove("Loot")
