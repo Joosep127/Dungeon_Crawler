@@ -11,7 +11,7 @@ class Equipment:
 def None_Equipment(a):
     Equipment("None", a, 0)
 
-def Create_Equipment(a, slot=None):
+def Equipment_create(a, slot=None):
     if slot == None:
         slot = random.choice([
             "Helmet",

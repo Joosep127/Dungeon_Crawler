@@ -45,12 +45,11 @@ def Magic(player,enemy, can_see_stats):
     
     return player, {"type":a["type"], "element":a["element"], "value":a["value"], "name":name}
 #UNFINISHED
-
 def Inventory(player,enemy, can_see_stats):
-    inv = {x:i for x,i in player.inventory.items() if not isinstance(i[0], object)}
     has_consumed_item = False
     happening = "\n"
     while True:
+        inv = {x:i for x,i in player.inventory.items() if not isinstance(i[0], object)}
         Combat_Hud(player, enemy, can_see_stats)
         print(happening)
         print('-'*22)
@@ -90,7 +89,6 @@ def Inventory(player,enemy, can_see_stats):
         
         happening = player.use_inventory({"name": dic[d], "value": player.inventory[dic[d]][a-d]})
         index -= 1
-
 
 def Fight(player):
 

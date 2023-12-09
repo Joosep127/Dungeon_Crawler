@@ -8,7 +8,7 @@ import time
 clear = lambda: os.system('cls')
 
 def Debug_Create(name, health, mana, damage, coin, clss):
-    return(Player(name, health, mana, damage, coin, clss))
+    return(Player(name, health, mana, damage, coin, clss)) # Player("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
 class Player:
     equipment = {
         "Helmet": None,
@@ -17,7 +17,6 @@ class Player:
         "Boots": None,
         "Sword": None    
 }
-    # Player("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
     def __init__(self, name, health, mana, damage, coin, clss):
         self.name = name
         self.health = health
@@ -247,6 +246,7 @@ class Player:
     def add_inventory(self, item):
         if isinstance(item, object):
             self.inventory["Equipment"].append(item)
+            return()
         elif item["name"] in self.inventory:
             self.inventory[item["name"]].append(item["effect"])
         else:
@@ -302,9 +302,12 @@ class Player:
             return(0)
         return(self.equipment['sword'].stat)
 
-    def add_skill(self, a):
+    def add_skill(self, a, amount=None):
         if a in self.skills:
-            self.skills[a] += 1
+            if amount:
+                self.skills[a] += amount
+            else:
+                self.skills[a] += 1
 
 def find_affliction(a):
     try:
@@ -414,7 +417,7 @@ def Create():
     selected_class_data = game_classes[selected_class]
     multipliers = selected_class_data["multipliers"]
     player = Player(name, selected_class_data["health"], selected_class_data["mana"], selected_class_data["damage"], selected_class_data["coin"], selected_class)
-
+    
     for j, i in multipliers.items():
         player.multipliers[j] = i
 

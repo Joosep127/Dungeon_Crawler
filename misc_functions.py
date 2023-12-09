@@ -2,8 +2,7 @@ import time
 import os
 import json
 import random
-from Classes.player import Debug_Create 
-from Adventure.fight import Fight
+from Classes.player import Debug_Create
 from Adventure.loot import Loot
 clear = lambda: os.system('cls')
 
@@ -28,6 +27,32 @@ def Combat_Hud(player, enemy, can_see_stats):
     else:
         print("The object can_see_stats is broken")
         time.sleep(1)
+
+def Camping_Hud(player):
+    clear()
+    print(f"{player.name}, {player.clss}")
+    print(f"Hp: {player.health}/{player.max_health} | Magic: {player.mana}/{player.max_mana} | {player.coin}$ | Lvl: {player.level}")
+    if player.equipment["Helmet"]:
+        print(f'Helmet     : {player.equipment["Helmet"].stat:^5}Def,  {player.equipment["Helmet"].name}')
+    else:
+        print(f'Helmet     : ----')
+    if player.equipment["Chestplate"]:
+        print(f'Chestplate : {player.equipment["Chestplate"].stat:^5}Def,  {player.equipment["Chestplate"].name}')
+    else:
+        print(f'Chestplate : ----')
+    if player.equipment["Leggings"]:
+        print(f'Leggings   : {player.equipment["Leggings"].stat:^5}Def,  {player.equipment["Leggings"].name}')
+    else:
+        print(f'Leggings   : ----')
+    if player.equipment["Boots"]:
+        print(f'Boots      : {player.equipment["Boots"].stat:^5}Def,  {player.equipment["Boots"].name}')
+    else:
+        print(f'Boots      : ----')
+    if player.equipment["Sword"]:
+        print(f'Sword      : {player.equipment["Sword"].stat:^5}Def,  {player.equipment["Sword"].name}')
+    else:
+        print(f'Sword      : ----')
+    print('-'*22)
 
 def Map_Hud(player, map, player_pos, player_seen):
     clear()
@@ -116,7 +141,7 @@ def Choose_Zone(player):
             "Jump down a deeper hole (progress)" if random.random() < 0.5 and player.timer != 0 and player.depth != 3 else ""
                 ]
     
-    if tempo and random.random <= 0.8:
+    if tempo and random.random() <= 0.8:
         options = [
             *zones,
             "Go towards the light"
@@ -174,72 +199,3 @@ def Choose_Zone(player):
             break
 
     return player, t
-
-def Set_Camp(player):
-    happening = '\n'
-    while True:
-        clear()
-        options = ['Inventory', 'Upgrade(Once per zone)' if 'Upgrade(Once per zone)' in player.conditionals else '', 'Rest(once per zone)'if 'Rest(once per zone)' in player.conditionals else '', 'Hunt']
-        if '' in options: options.remove('')
-
-        print(f"{player.name}, {player.clss}")
-        print(f"Hp: {player.health}/{player.max_health} | Magic: {player.mana}/{player.max_mana} | {player.coin}$ | Lvl: {player.level}")
-        print(f'Helmet    : {player.equipment["Helmet"].stat:^10};  {player.equipment["Helmet"].name}')
-        print(f'Chestplate: {player.equipment["Chestplate"].stat:^10};  {player.equipment["Chestplate"].name}')
-        print(f'Leggings  : {player.equipment["Leggings"].stat:^10};  {player.equipment["Leggings"].name}')
-        print(f'Boots     : {player.equipment["Boots"].stat:^10};  {player.equipment["Boots"].name}')
-        print(f'Sword     : {player.equipment["Sword"].stat:^10};  {player.equipment["Sword"].name}')
-        print('-'*22)
-        print("{:^10} {:^5}\n".format("Index", "Options"))
-        print(f"{'0':^10}Exit\n")        
-        print('- '*11)
-        print(happening)
-        a = input("Select: ")
-        if not a.isdigit():
-            happening = "\nPlease select a correct index."
-            continue
-        if a == 0:
-            break
-        a = options[int(a)]
-
-        if a == "Inventory":
-            pass
-
-        elif a == 'Upgrade(Once per zone)':
-
-            temp = input(f"Pick something to upgrade [Helmet, Chestplate, ...] or 0 to exit.\nSelect:")
-            if temp == "0":
-                happening = "\nYou stopped upgrading."
-            
-            if temp in player.equipment.keys():
-                if "+" not in player.equipment[temp].name:
-                    player.conditionals.append('Upgrade(Once per zone)')
-                    print(".")
-                    time.sleep(0.2)
-                    print("..")
-                    time.sleep(0.2)
-                    print("...")
-                    player.equipment[temp].name += "+"
-                    player.equipment[temp].stat = round(player.equipment[temp].stat*1.5)
-                else:
-                    happening = "This equipment has already been upgraded"
-            else:
-                happening = "\nYou stopped upgrading."
-
-        elif a == 'Rest(once per zone)':
-            player.conditionals.append('Rest(once per zone)')
-            print(".")
-            time.sleep(0.2)
-            print("..")
-            time.sleep(0.2)
-            print("...")
-            time.sleep(0.2)
-            h = (player.max_health-player.health)/0.3
-            input(f"You gained {h} hp from resting.\n[ENTER to continue]")
-
-        elif a == 'Hunt':
-            player = Fight(player)
-
-
-
-    return(player)

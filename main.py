@@ -1,7 +1,8 @@
 import os
 from math import floor
 from Classes.player import Create, Debug_Create 
-from misc_functions import Hud, Generate_map, Map_Hud, Choose_Zone, Set_Camp
+from misc_functions import Hud, Generate_map, Map_Hud, Choose_Zone
+from Adventure.camp import Set_Camp
 from Adventure.fight import Fight
 from Adventure.shop import Shop,Generate_Shop_Inv
 import random
@@ -11,9 +12,9 @@ clear = lambda: os.system('cls')
 
 
 def Main():
-    #player = Debug_Create("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
+    player = Debug_Create("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
     
-    player = Create()
+    #player = Create()
     player.zone = 'Underground Forest' 
 
     Hud(player)
@@ -43,7 +44,7 @@ def Main():
             if player_seen < player_pos-1:
                  player_seen = player_pos
 
-            options = ["Move Forward" if player_pos < len(Map) else "Leave Current Zone", "Go Backwards" if player_pos != 0 else "-", "Open inventory.", "Enter Shop" if Map[player_pos-1] == "s" else ""]
+            options = ["Move Forward" if player_pos < len(Map) else "Leave Current Zone", "Go Backwards" if player_pos != 0 else "-", "Set up camp", "Enter Shop" if Map[player_pos-1] == "s" else ""]
             options = [i for i in options if i != ""]
 
             Map_Hud(player, Map, player_pos, player_seen)
@@ -72,7 +73,7 @@ def Main():
                 t = "You're back on your journey"
                 continue
             elif a == "Enter Shop":
-                Shop(player, shops[str(player_pos)])
+                Shop(player, shops[str(player_pos-1)])
                 t = "You left the shop"
                 continue
             elif a == "Leave Current Zone":

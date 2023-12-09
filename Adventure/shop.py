@@ -4,7 +4,7 @@ import json
 import random
 import time
 from misc_functions import Hud
-from Classes.Equipment_create import Create_Equipment
+from Classes.Equipment_create import Equipment_create
 
 def Display_Shop_Items(shop_inverntory):
 
@@ -41,7 +41,7 @@ def Generate_Equipment(stat, probability, cost, player_multiplier, depth_multipl
 
         cost =  ceil(random.randint(*cost) + 2 * (random_stat - 1) * player_multiplier * sqrt(depth_multiplier))
 
-        return [ Create_Equipment(random_stat) , cost]
+        return [ Equipment_create(random_stat) , cost]
 
 def Generate_Shop_Inv(depth, multiplier):
     with open("Data/Shop_Items.json", 'r') as f:
