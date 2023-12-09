@@ -106,7 +106,7 @@ def generate_map_string(zone_data):
     return '___'+''.join(m)
     
 def Generate_map(zone):
-    with open("Data\Zone_Length.json", "r") as f:
+    with open("Data/Zone_Length.json", "r") as f:
         details = json.load(f)
     
     if zone not in details.keys():
@@ -122,7 +122,7 @@ def Choose_Zone(player):
 
     tempo = False
     
-    with open("Data\Zone_Order.json", "r") as f:
+    with open("Data/Zone_Order.json", "r") as f:
         zones = json.load(f)[str(player.depth)]
 
     if player.zone != None:
@@ -150,7 +150,7 @@ def Choose_Zone(player):
     options = [i for i in options if i != ""]
 
     descriptions = {}
-    with open("Data\Zone_Descriptions.json", "r") as f:
+    with open("Data/Zone_Descriptions.json", "r") as f:
         a = json.load(f)
         for i in zones:
             descriptions[i] = a[i]
