@@ -48,6 +48,8 @@ def Zone_Loot(player):
         else:
             t = "Please enter a number you fucking idiot.\nWhat do you get?:"
             continue
+        
+        break
          
         
     return player 

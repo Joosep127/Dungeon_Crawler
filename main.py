@@ -24,8 +24,7 @@ def Main():
         print("You one day decide to go to work, but you fell in to a hole.\n")
     input("[Press enter to continue]")
     
-    #Map = Generate_map(player.zone)
-    Map = "_s_"
+    Map = Generate_map(player.zone)
 
     player_pos = 1
     player_seen = 0
