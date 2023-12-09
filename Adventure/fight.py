@@ -186,6 +186,9 @@ def Fight(player):
             a = int(a)
             if 0 <= int(a)-1 < len(options):
                 a = options[a-1]
+                if a in ["Magic","Rest","Fight"]:
+                    player.add_skill(a.lower())
+
                 if a == 'Attack':
                     if is_slip:
                         if random.random() < 0.2:
@@ -242,9 +245,6 @@ def Fight(player):
         
         if isinstance(a, str):
             a = a.lower()
-
-        if a in {"Magic","Rest","Fight"}:
-            player.add_skill(a.lower())
 
         player, enemy, temp = Enemy_Player_Interaction(player, enemy, a, t)
 

@@ -32,7 +32,7 @@ def Zone_Loot(player):
                         input(f"Because you're so talented you gained a {spell} from your current zone.\n[Enter To Continue]")
                     else:
                         player.max_mana += 10
-                        player.add_skill["magic", 30]
+                        player.add_skill("magic", 30)
                         input(f"You failed at being talented but you gained 10 max mana and experience in casting magic")
                 elif a == "Strength":
                     if random.random()<= 0.2:

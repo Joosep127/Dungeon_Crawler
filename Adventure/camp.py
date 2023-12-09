@@ -26,7 +26,7 @@ def Inventory(player):
             print("{:^10} [{:<5}] {:<12} {:<5}".format("", "Amount", "Item", "Effectivness"))
             for item, values in inv.items():
                 dic[index] = item
-                for value in values:
+                for value in sorted(set(values)):
                     print(f"{index:^10} [{values.count(value):^5}] {item:<20} {value:<5}")
                     index += 1
 

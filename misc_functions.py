@@ -49,7 +49,7 @@ def Camping_Hud(player):
     else:
         print(f'Boots      : ----')
     if player.equipment["Sword"]:
-        print(f'Sword      : {player.equipment["Sword"].stat:^5}Def,  {player.equipment["Sword"].name}')
+        print(f'Sword      : {player.equipment["Sword"].stat:^5}Dmg,  {player.equipment["Sword"].name}')
     else:
         print(f'Sword      : ----')
     print('-'*22)

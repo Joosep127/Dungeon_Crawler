@@ -244,7 +244,7 @@ class Player:
         return(t0)
     
     def add_inventory(self, item):
-        if isinstance(item, object):
+        if not isinstance(item, dict):
             self.inventory["Equipment"].append(item)
             return()
         elif item["name"] in self.inventory:
@@ -256,7 +256,7 @@ class Player:
                 self.inventory[i].sort()
     
     def use_inventory(self, item):
-        if isinstance(item, object):
+        if not isinstance(item, dict):
             self.add_equipment(item)
             return()
         elif item["name"] == "Health Potion":
@@ -271,8 +271,7 @@ class Player:
         return(t)
 
     def lose_inventory(self, item):
-
-        if isinstance(item, object):
+        if not isinstance(item, dict):
             del self.inventory["Equipment"][self.inventory["Equipment"].index(item)]
             return()
 
@@ -300,7 +299,7 @@ class Player:
     def equipment_damage(self):
         if self.equipment['Sword'] == None:
             return(0)
-        return(self.equipment['sword'].stat)
+        return(self.equipment['Sword'].stat)
 
     def add_skill(self, a, amount=None):
         if a in self.skills:
