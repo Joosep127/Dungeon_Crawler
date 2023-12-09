@@ -60,8 +60,7 @@ spell format =
 
 Inventory = {'name' : ['effect', 'effect', 'effect',...],
 	     'name' : ['effect', 'effect', 'effect',...],
-	     object : 'Equipment',
-	     object : 'Equipment'}
+	     'Equipment' : [object, object,...]}
 
 #Fight Hud
 Joe, The man			|	Goblin

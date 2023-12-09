@@ -88,7 +88,7 @@ def Inventory(player,enemy, can_see_stats):
             if i <= a:
                 d = i
         
-        happening = player.use_inventory(dic[d], player.inventory[dic[d]][a-d])
+        happening = player.use_inventory({"name": dic[d], "value": player.inventory[dic[d]][a-d]})
         index -= 1
 
 

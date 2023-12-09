@@ -245,9 +245,8 @@ class Player:
         return(t0)
     
     def add_inventory(self, item):
-        if type(item) != dict:
+        if isinstance(item, object):
             self.inventory["Equipment"].append(item)
-            return
         elif item["name"] in self.inventory:
             self.inventory[item["name"]].append(item["effect"])
         else:
@@ -256,32 +255,43 @@ class Player:
             if isinstance(self.inventory[i], list):
                 self.inventory[i].sort()
     
-    def use_inventory(self, item_name, value):
-        if item_name == "Health Potion":
-            self.add_hp(value)
-            t = f"You gained +{value} hp."
-        elif item_name == "Mana Potion":
-            self.add_mana(value)
-            t = f"You gained +{value} mana."
+    def use_inventory(self, item):
+        if isinstance(item, object):
+            self.add_equipment(item)
+            return()
+        elif item["name"] == "Health Potion":
+            self.add_hp(item['value'])
+            t = f"You gained +{item['value']} hp."
+        elif item["name"] == "Mana Potion":
+            self.add_mana(item['value'])
+            t = f"You gained +{item['value']} mana."
         else:
-            t = "You used an item that cannot be used. Gongrats. You lost the " + item_name + " now."
-        self.lose_inventory({'name': item_name, 'effect': value})
+            t = "You used an item that cannot be used. Gongrats. You lost the " + item["name"] + " now."
+        self.lose_inventory({'name': item["name"], 'effect': item['value']})
         return(t)
 
     def lose_inventory(self, item):
-        if item["name"] not in self.inventory:
+
+        if isinstance(item, object):
+            del self.inventory["Equipment"][self.inventory["Equipment"].index(item)]
+            return()
+
+        elif item["name"] not in self.inventory:
             print("[ERROR]Item that you wanted to remove does not exist in your invetory")
             time.sleep(2)
             return()
-        if self.inventory["Equipment"] == :
-            del self.inventory[item["name"]]
-            return()
+        
         self.inventory[item["name"]].remove(item["effect"])
         if self.inventory[item["name"]] == []:
             del self.inventory[item["name"]]
-    
+             
     def add_equipment(self, item): #name, slot stat
-        self.equipment[item.slot] = item
+        if self.equipment[item.slot] == None: 
+            self.equipment[item.slot] = item
+        else:
+            add_inventory(self.equipment[item.slot])
+            self.equipment[item.slot] = item
+        self.lose_inventory(item)
 
     def remove_equipment(self, item): #name, slot stat
         self.equipment[item.slot] = None
@@ -295,7 +305,6 @@ class Player:
     def add_skill(self, a):
         if a in self.skills:
             self.skills[a] += 1
-
 
 def find_affliction(a):
     try:
