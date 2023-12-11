@@ -10,7 +10,6 @@ def Magic(player,enemy, can_see_stats):
     spells = player.spells
     if spells == {}:
         return player, 'No spells'
-    has_used_spells = False
     happening = ""
     while True:
         Combat_Hud(player, enemy, can_see_stats)
@@ -30,10 +29,8 @@ def Magic(player,enemy, can_see_stats):
             continue
         a = int(a)
 
-        if a == 0 and not has_used_spells:
-            return player, "exit"
         if a == 0:
-            return player, ""
+            return player, "exit"
         if 0 < a <= len(player.spells.keys()):
             pass
         else:
@@ -41,15 +38,19 @@ def Magic(player,enemy, can_see_stats):
             continue
         name = sorted(player.spells.keys())[a-1]
         a = player.info_spell(name)
+        if a['cost'] > player.mana:
+            happening = "You don't have enough money to cast this spell."
+            continue
         break
-    
+
+    t = player.lose_mana(int(spell["cost"]))
     return player, {"type":a["type"], "element":a["element"], "value":a["value"], "name":name}
-#UNFINISHED
+
 def Inventory(player,enemy, can_see_stats):
     has_consumed_item = False
     happening = "\n"
     while True:
-        inv = {x:i for x,i in player.inventory.items() if not isinstance(i[0], object)}
+        inv = {x:i for x,i in player.inventory.items() if not isinstance(i, object)}
         Combat_Hud(player, enemy, can_see_stats)
         print(happening)
         print('-'*22)
@@ -126,7 +127,7 @@ def Fight(player):
             can_attack = True
             can_cast_magic = True
 
-            for x, i in player.afflictions.keys():
+            for x, i in player.afflictions.items():
                 if i["type"] == "can_attack":
                     afflicted_attack = x
                     can_attack = False
@@ -148,11 +149,11 @@ def Fight(player):
                 happening += "\nDue to your afflictions you can't "
                 if not can_attack:
                     happening += "Attack"
-                    if not can_use_magic:
+                    if not can_cast_magic:
                         happening += " or"
                     else:
                         happening += "."
-                if not can_use_magic:
+                if not can_cast_magic:
                     happening += " use magic."
 
   
@@ -254,12 +255,6 @@ def Fight(player):
         else:
             happening += temp
 
-        
-                    
-
-
-
-        
         
     if "undead" in player.afflictions:
         player.health *= 2

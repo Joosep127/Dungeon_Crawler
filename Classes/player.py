@@ -63,7 +63,7 @@ class Player:
         
     def lose_hp(self, lost, args=()):
         lost *= self.affliction_multipliers['take_damage']
-        self.health -= lost
+        self.health -= round(lost)
         
         if self.health <= 0:
             if args == ():
@@ -89,9 +89,11 @@ class Player:
             self.mana = self.max_mana
 
     def lose_mana(self, lost):
-        self.mana -= add
+        self.mana -= lost
         if self.mana < 0:
             self.mana = 0
+            return('No Mana')
+        return(None)
 
     def add_xp(self, add):
         xp_gained = floor(add * self.multipliers["xp"])
@@ -142,21 +144,22 @@ class Player:
         self.afflictions = {}
 
     def add_afflictions(self, a):
+        a = a.lower()
         name = a
-        a = find_affliction(a.lower())
+        a = find_affliction(a)
         if not a:
             print("NO AFFLICTION FOUND AS " + a)
             time.sleep(1)
             return
-        if name in self.afflictions():
+        if name in self.afflictions:
             if "gain" in a.keys():
                 if a["gain"] in self.afflictions():
-                    return (player, f"An affliction {list(a.keys())[0]} was cast on you but you could attain it because you had an upgraded version of it already called {a.get('gain', 'unknown')}.")
+                    return (f"An affliction {list(a.keys())[0]} was cast on you but you could attain it because you had an upgraded version of it already called {a.get('gain', 'unknown')}.")
                 else:
                     self.afflictions[a["gain"]] = find_affliction(a["gain"])
-                    return(player, f"An affliction {list(a.keys())[0]} was cast on you but it upgraded to {a.get('gain', 'unknown')}.")
-        self.afflictions[a] = a
-        return(player, f"An affliction {a.keys[0]} was cast on you.")
+                    return(f"An affliction {list(a.keys())[0]} was cast on you but it upgraded to {a.get('gain', 'unknown')}.")
+        self.afflictions[name] = a
+        return(f"An affliction {list(a.keys())[0]} was cast on you.")
     
     def round_start(self):
         t = ''
@@ -207,11 +210,11 @@ class Player:
                 print(f"Unknown affliction {i}")
 
 
-            if "lose_next_turn" in i:
-                if "lose_next_turn" <= 0:
+            if "lose_next_turn" in i.keys():
+                if i["lose_next_turn"] <= 0:
                     del self.afflictions[x]
                 else:
-                    self.afflictions["lose_next_turn"] -= 1
+                    self.afflictions[x]["lose_next_turn"] -= 1
         
         self.affliction_multipliers["do_damage"] = do_damage
         self.affliction_multipliers["do_damage_additive"] = do_damage_additive
@@ -246,14 +249,17 @@ class Player:
     def add_inventory(self, item):
         if not isinstance(item, dict):
             self.inventory["Equipment"].append(item)
-            return()
         elif item["name"] in self.inventory:
             self.inventory[item["name"]].append(item["effect"])
         else:
             self.inventory[item["name"]] = [item["effect"]]
         for i in self.inventory:
             if isinstance(self.inventory[i], list):
-                self.inventory[i].sort()
+                if i != "Equipment": 
+                    self.inventory[i].sort()
+                elif i == "Equipment": 
+                    slot_order = ['Boots', 'Leggings', 'Chestplate', 'Helmet', 'Sword']
+                    self.inventory[i].sort(key=lambda x: (slot_order.index(x.slot), x.stat), reverse=True)
     
     def use_inventory(self, item):
         if not isinstance(item, dict):
@@ -288,7 +294,7 @@ class Player:
         if self.equipment[item.slot] == None: 
             self.equipment[item.slot] = item
         else:
-            add_inventory(self.equipment[item.slot])
+            self.add_inventory(self.equipment[item.slot])
             self.equipment[item.slot] = item
         self.lose_inventory(item)
 
@@ -327,20 +333,40 @@ def find_spell(a):
         return None
 
 def Change_name():
+    t = ''
     while True:
+        clear()
+        print(t)
         name = input("Enter your name: ")
         if len(name) > 20:
-            print("Name is too long. It must be 20 characters or less.")
+            t = "*Name is too long. It must be 20 characters or less."
         else:
             try:
                 name.encode('ascii')
             except UnicodeEncodeError:
-                print("Name contains non-ASCII characters. Please enter a valid Player name.")
+                t = "*Name contains non-ASCII characters. Please enter a valid Player name."
             else:
-                return(name.title())
+                name = name.title()
+            break
+    clear()
+    t = ''
+    while True:
+        a = input(f"{name}. Is this username correct? \n Index \n  [0] - No \n  [1] - Yes \n {t} \nSelect Index: ")
+        if a == '0':
+            clear()
+            return Change_name()
+        elif a == '1':
+            return name
+        else:
+            clear()
+            t = '*Please insert you answer again.'
+        
 
-def Create():
-    name = Change_name()
+def Create(name=None):
+    clear()
+    t = ''
+    if not name:
+        name = Change_name()
     game_classes = {
     'The Regular Guy': {
         'name': '*Has a ketchup stain on his shirt',
@@ -385,33 +411,34 @@ def Create():
 }
     while True:
         clear()
-        print(f'Hello {name}. Please choose your character class: ')
+        print(f'Hello {name}. \n{t}\nClasses: \n')
         for x, (j, i) in enumerate(game_classes.items()):
             print(f'[{x + 1}] : {j} ({i["name"]}) | \n'
                   f'                    Hp: {i["health"]} \n'
                   f'                    Mana: {i["mana"]} \n'
                   f'                    Dmg: {i["damage"]} \n'
                   f'                    Coin: {i["coin"]}')
-        choice = input("Enter the number corresponding to your choice: ")
+        choice = input("\nEnter Index: ")
 
         if choice.isdigit() and 1 <= int(choice) <= len(game_classes):
             selected_class = list(game_classes.keys())[int(choice) - 1]
-            print(f'You have chosen: {selected_class}') 
-            time.sleep(1)
+            print(f'You have chosen: {selected_class}')
+            time.sleep(0.6)
             break
         else:
-            print("Invalid choice. Please enter a valid number.") 
-            time.sleep(1)
+            t = "Invalid choice. Please enter a valid number."
 
     while True:
         clear()
         print(f"{name}, {selected_class}")
-        answer = input("Is this correct? [yes, no]: ").lower()
-        if answer == "yes":
+        answer = input(f"Is this correct? \n Index \n  [0] - No \n  [1] - Yes \n{t}\nSelect Index: ").lower()
+        if answer == "1":
             break
-        elif answer == "no":
+        elif answer == "2":
+            return Create(name)
+        else:
             clear()
-            return Create()
+            t = '*Please insert you answer again.'
 
     selected_class_data = game_classes[selected_class]
     multipliers = selected_class_data["multipliers"]

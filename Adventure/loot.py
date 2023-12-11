@@ -21,7 +21,7 @@ def Zone_Loot(player):
                 a = options[a-1]
                 
                 if a == 'New equipment':
-                    sword =  Equipment_create((random.randint(0,10)+10*player.level)**(player.depth*2-1))
+                    sword =  Equipment_create((random.randint(0,10)+7*player.level)**(player.depth*1.4-1))
                     input(f'You got a new {sword.name}! {sword.name} with the damage stat of {sword.stat}. It has been added to your inventory\n[Enter To Continue]')
                     player.add_inventory(sword)
                 elif a == "Magic Power":

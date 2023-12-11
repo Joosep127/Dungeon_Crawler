@@ -133,7 +133,7 @@ def Choose_Zone(player):
             zones.remove(player.zone)
             del zones[random.randint(0, len(zones) - 1)]
     else:
-        zones = random.choice(zones)
+        zones = [random.choice(zones)]
 
     options = [
             "Loot" if random.random() < 0.3 * player.multipliers["luck"] and player.timer != 0 else "",

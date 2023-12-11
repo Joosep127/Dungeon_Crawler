@@ -8,13 +8,12 @@ from Adventure.shop import Shop,Generate_Shop_Inv
 import random
 import time 
 clear = lambda: os.system('cls')
-
-
+clear()
 
 def Main():
-    player = Debug_Create("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
-    
-    #player = Create()
+
+    #player = Debug_Create("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
+    player = Create()
     player.zone = 'Underground Forest' 
 
     Hud(player)
@@ -38,7 +37,6 @@ def Main():
         
         t = ""
         while True:
-            
 
             if player_seen < player_pos-1:
                  player_seen = player_pos
@@ -96,12 +94,3 @@ def Main():
 
 if __name__ == "__main__":
     Main()
-    
-    while False:
-        
-        player = Debug_Create("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
-        player.zone = 'Underground Forest' 
-        for i in range(5):
-            player.add_inventory({'name' : "Health Potion", 'effect' : random.randint(5,7)})
-            player.add_inventory({'name' : "Mana Potion", 'effect' : random.randint(5,7)})
-            player.add_spell("Invisibility")

@@ -24,9 +24,8 @@ afflictions = [ # can be gained through an enemy, items or your own spells
 
 affliction  'name': {"type"  "value"  "operator"  "lose_next_turn"  "chance"  "gain"  'activated'}
 
-affliction types = ['hit_yourself']
 
-affliction types ive programmed in = ["do_damage", 'lose_hp', 'lose_half_max_hp', 'do_nothing', "add_hp", 'lose_mana', "take_damage_half_hp", 'chance_to_fail_attack', 'can_attack', 'can_cast_magic']
+affliction types ive programmed in = ["do_damage", 'lose_hp', 'lose_half_max_hp', 'do_nothing', "add_hp", 'lose_mana', "take_damage_half_hp", 'chance_to_fail_attack', 'can_attack', 'can_cast_magic', 'hit_yourself']
 
 enemy afflictions =  "duration" "disruption"
 
@@ -84,3 +83,8 @@ enemy actions = attack heal block afflict
 for a spell {type: power, element: type, value: int, name: name}
 for fight 'Attack'
 for run 'Run'
+
+#Things To Do:
+.Program in skill functionality
+.Make the camping inventory functionality better
+.enemy turn actiavtes when leaving magic menu

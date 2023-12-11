@@ -6,6 +6,9 @@ import random
 import time 
 clear = lambda: os.system('cls')
 
+def cal_inv_index_size(inv):
+    return sum([len(set(i)) for i in inv.values()])
+
 def Inventory(player):
     happening = "\n"
     while True:
@@ -62,7 +65,7 @@ def Inventory(player):
             
             happening = player.use_inventory({"name": dic[d], "value": player.inventory[dic[d]][a-d]})
         else:
-            a -= len(inv)+1
+            a -= cal_inv_index_size(inv)+1
             happening = player.add_equipment(e_inv[a])
         index -= 1
 
@@ -82,6 +85,9 @@ def Set_Camp(player):
         print(happening)
         a = input("Select: ")
         if not a.isdigit():
+            happening = "\nPlease select a correct index."
+            continue
+        if not 0 <= int(a) <= len(options):
             happening = "\nPlease select a correct index."
             continue
         if a == "0":

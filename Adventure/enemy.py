@@ -12,7 +12,7 @@ def Select_Enemy(depth, zone):
 def Affliction_Select(player):
     with open("Data/Gain_Affliction.json", 'r') as f:
         a = json.load(f)[player.zone]
-    return(player.add_afflictions(a))
+    return player, player.add_afflictions(random.choice(a))
 
 def Magic_Damage_2_Enemy(player, enemy, player_action):
     temp = enemy['weaknesses'][player_action["element"]]
@@ -36,10 +36,10 @@ def Magic_Damage_2_Enemy(player, enemy, player_action):
         player.add_afflictions(player_action["name"])
     elif player_action["type"] == "duration":
         enemy['afflictions'].append({player_action["type"]: player_action["value"]})
-        temp += f'The {player_action["name"]} afflicted the enemy for {player_action["value"]} rounds.'
+        temp += f'The {player_action["name"]} afflicted the enemy for the next {player_action["value"]} rounds.'
     elif player_action["type"] == "disruption":
         enemy['afflictions'].append({player_action["type"]: {'value':player_action["value"], 'duration': 3}})
-        temp += f'The {player_action["name"]} afflicted the enemy for {player_action["value"]} rounds.'
+        temp += f'The {player_action["name"]} afflicted the enemy for the next {player_action["value"]} rounds.'
     else:
         temp += f'No such spell type as  {player_action["type"]} exists. This spell has the name of {player_action["name"]}'
 
@@ -92,6 +92,7 @@ def Decide_Action(enemy, player):
 
 def Enemy_Player_Interaction(player, enemy, player_action, message):
 
+    a = ''
     enemy_action = Decide_Action(enemy, player)
 
     if player_action == 'run' and random.random() < 0.4: #If you succesfully run away
@@ -130,7 +131,7 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
         if player_action == 'attack':
             if random.random() < 0.2:
                 t = round(player.cal_damage()*0.4)
-                enemy.health -= t
+                enemy["health"] -= t
                 a = f'\nThe {enemy["name"]} effectively blocked your attack. Dealt {t} damage'
             else:
                 t = round(player.cal_damage()*0.6)
