@@ -10,6 +10,13 @@ import time
 clear = lambda: os.system('cls')
 clear()
 
+def gen_shops(player, Map):
+    shops = {}
+    for x, i in enumerate(Map):
+        if i == "s":
+            shops[str(x)] = Generate_Shop_Inv(player.depth, player.multipliers['equipment'])
+    return(shops)
+
 def Main():
 
     #player = Debug_Create("Mr. Moneybags", 100, 100, 100, 100, "The Monopoly man")
@@ -27,10 +34,7 @@ def Main():
 
     player_pos = 1
     player_seen = 0
-    shops = {}
-    for x, i in enumerate(Map):
-        if i == "s":
-            shops[str(x)] = Generate_Shop_Inv(player.depth, player.multipliers['equipment'])
+    shops = gen_shops(player, Map)
     
 
     while True: # Game Loop
@@ -77,9 +81,10 @@ def Main():
                 player_pos = 1
                 player_seen = 0
                 player, t = Choose_Zone(player)
-                Map = Generate_map(player.zone)
                 if t == "end":
                     break
+                Map = Generate_map(player.zone)
+                shops = gen_shops(player, Map)
                 continue
 
             if random.random() < 0.3:

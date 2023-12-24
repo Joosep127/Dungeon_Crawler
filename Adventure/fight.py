@@ -50,7 +50,7 @@ def Inventory(player,enemy, can_see_stats):
     has_consumed_item = False
     happening = "\n"
     while True:
-        inv = {x:i for x,i in player.inventory.items() if not isinstance(i, object)}
+        inv = {x:i for x,i in player.inventory.items() if x != "Equipment"}
         Combat_Hud(player, enemy, can_see_stats)
         print(happening)
         print('-'*22)
@@ -63,7 +63,7 @@ def Inventory(player,enemy, can_see_stats):
         dic = {}
         for item, values in inv.items():
             dic[index] = item
-            for value in values:
+            for value in sorted(set(values)):
                 print(f"{index:^10} [{values.count(value):^5}] {item:<20} {value:<5}")
                 index += 1
         a = input("Select: ")

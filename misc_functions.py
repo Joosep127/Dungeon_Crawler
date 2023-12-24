@@ -18,7 +18,7 @@ def Combat_Hud(player, enemy, can_see_stats):
     clear()
     if can_see_stats:
         print("{:<41}|	{}".format(f'{player.name}, {player.clss}', enemy['name']))
-        print("Hp: {:<14}| Magic: {:<14}|	Hp: {:<14}".format(f'{player.health}/{player.max_health}', f'{player.mana}/{player.mana}', f'{enemy["health"]}/{enemy["max_health"]}'))
+        print("Hp: {:<14}| Magic: {:<14}|	Hp: {:<14}".format(f'{player.health}/{player.max_health}', f'{player.mana}/{player.max_mana}', f'{enemy["health"]}/{enemy["max_health"]}'))
         print("DMG: {:<13}| DEF: {:<16}|	DMG: {:<13} \n".format(f'{player.damage}(+{player.cal_damage()-player.damage})', player.cal_defence(), enemy["attack"]))
     elif not can_see_stats:
         print("{:<41}|	{}".format(f'{player.name}, {player.clss}', "*"*len(enemy['name'])))

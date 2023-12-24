@@ -153,7 +153,7 @@ def Enemy_Player_Interaction(player, enemy, player_action, message):
 
     elif enemy_action == 'heal':
     
-        healt = 0.4*enemy["max_health"]
+        healt = round(0.4*enemy["max_health"])
 
         if player_action == 'attack':
             t = player.cal_damage()
